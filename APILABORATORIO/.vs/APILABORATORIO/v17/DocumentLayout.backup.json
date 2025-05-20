@@ -1,0 +1,58 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\DELL\\Desktop\\PROYECTO\\proyecto\\APILABORATORIO\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{1D93686F-C4E9-4C3C-ACB2-A5A0E3E626AC}|APILABORATORIO.csproj|c:\\users\\dell\\desktop\\proyecto\\proyecto\\apilaboratorio\\controllers\\resultadocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1D93686F-C4E9-4C3C-ACB2-A5A0E3E626AC}|APILABORATORIO.csproj|solutionrelative:controllers\\resultadocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D93686F-C4E9-4C3C-ACB2-A5A0E3E626AC}|APILABORATORIO.csproj|c:\\users\\dell\\desktop\\proyecto\\proyecto\\apilaboratorio\\controllers\\imprimirresultados.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1D93686F-C4E9-4C3C-ACB2-A5A0E3E626AC}|APILABORATORIO.csproj|solutionrelative:controllers\\imprimirresultados.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 151,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ResultadoController.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\PROYECTO\\proyecto\\APILABORATORIO\\Controllers\\ResultadoController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ResultadoController.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\PROYECTO\\proyecto\\APILABORATORIO\\Controllers\\ResultadoController.cs",
+              "RelativeToolTip": "Controllers\\ResultadoController.cs",
+              "ViewState": "AgIAAA8AAACA9P////8PwCkAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T20:43:09.923Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ImprimirResultados.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\PROYECTO\\proyecto\\APILABORATORIO\\Controllers\\ImprimirResultados.cs",
+              "RelativeDocumentMoniker": "Controllers\\ImprimirResultados.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\PROYECTO\\proyecto\\APILABORATORIO\\Controllers\\ImprimirResultados.cs",
+              "RelativeToolTip": "Controllers\\ImprimirResultados.cs",
+              "ViewState": "AgIAAFoAAAAAmZmZmRkjwMIAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-15T00:55:17.066Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
