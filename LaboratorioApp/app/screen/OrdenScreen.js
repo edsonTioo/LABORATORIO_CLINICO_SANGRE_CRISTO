@@ -20,6 +20,7 @@ import {
   Feather,
   AntDesign,
 } from '@expo/vector-icons';
+import CreateClientModal from '../components/ComponentsMedico/CreateClientModal';
 import withAutoRefresh from './withAutoRefresh';
 const OrdenScreen = () => {
   // URLs de la API
@@ -45,7 +46,7 @@ const screenWidth = Dimensions.get('window').width;
   const [searchCliente, setSearchCliente] = useState('');
   const [cliente, setCliente] = useState([]);
   const [muestra, setMuestra] = useState([]);
-  const [tipoexamen, setTipoExamen] = useState([]);
+  const [tipoexamen, setTipoExamen] = useState([]);const [isClientModalVisible, setIsClientModalVisible] = useState(false);
   const [openDate, setOpenDate] = useState(false);
   const [openDate2, setOpenDate2] = useState(false);
   const [form, setForm] = useState({
@@ -331,31 +332,46 @@ const screenWidth = Dimensions.get('window').width;
           </View>
 
           {/* Campo Cliente */}
-          <View style={styles.fieldContainer}>
-            <Text style={styles.label}>Cliente:</Text>
-            <View style={styles.inputContainer}>
-              <Dropdown
-                data={filteredClientes}
-                labelField="label"
-                valueField="value"
-                value={form.idcliente?.toString()}
-                onChange={(item) => {
-                  setForm(prev => ({ ...prev, idcliente: item.value }));
-                  setSearchCliente('');
-                }}
-                onChangeText={setSearchCliente}
-                placeholder="Seleccionar Cliente"
-                style={styles.dropdown}
-                placeholderStyle={styles.placeholderStyle}
-                selectedTextStyle={styles.selectedTextStyle}
-                search
-                searchPlaceholder="Buscar cliente..."
-                renderLeftIcon={() => (
-                  <FontAwesome name="user" size={18} color="#555" style={styles.dropdownIcon} />
-                )}
-              />
-            </View>
-          </View>
+<View style={styles.fieldContainer}>
+  <Text style={styles.label}>Cliente:</Text>
+  
+  {/* Contenedor para pantallas grandes (dropdown y botón en fila) */}
+  <View style={styles.clientInputContainer}>
+    <View style={[styles.inputContainer, styles.flexGrow]}>
+      <Dropdown
+        data={filteredClientes}
+        labelField="label"
+        valueField="value"
+        value={form.idcliente?.toString()}
+        onChange={(item) => {
+          setForm(prev => ({ ...prev, idcliente: item.value }));
+          setSearchCliente('');
+        }}
+        onChangeText={setSearchCliente}
+        placeholder="Seleccionar Cliente"
+        style={styles.dropdown}
+        placeholderStyle={styles.placeholderStyle}
+        selectedTextStyle={styles.selectedTextStyle}
+        search
+        searchPlaceholder="Buscar cliente..."
+        renderLeftIcon={() => (
+          <FontAwesome name="user" size={18} color="#555" style={styles.dropdownIcon} />
+        )}
+      />
+    </View>
+    
+    {/* Botón que en móvil se coloca debajo */}
+    <View style={styles.clientButtonWrapper}>
+      <TouchableOpacity 
+        onPress={() => setIsClientModalVisible(true)}
+        style={styles.addClientButton}
+      >
+        <AntDesign name="plus" size={16} color="white" />
+        <Text style={styles.addClientButtonText}>Nuevo Cliente</Text>
+      </TouchableOpacity>
+    </View>
+  </View>
+</View>
 
           {/* Campo Fecha */}
           <View style={styles.fieldContainer}>
@@ -515,6 +531,16 @@ const screenWidth = Dimensions.get('window').width;
             <Text style={styles.buttonLabel}>Guardar Orden</Text>
           </View>
         </TouchableOpacity>
+        <CreateClientModal 
+  visible={isClientModalVisible}
+  onClose={() => setIsClientModalVisible(false)}
+  onClientCreated={(newClient) => {
+    // Actualiza la lista de clientes con el nuevo cliente
+    setCliente(prev => [...prev, newClient]);
+    // Selecciona automáticamente el nuevo cliente
+    setForm(prev => ({ ...prev, idcliente: newClient.idcliente.toString() }));
+  }}
+/>
       </ScrollView>
     </View>
   );
@@ -524,6 +550,33 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#f8f9fa",
+  }, clientInputContainer: {
+    flexDirection: Dimensions.get('window').width > 768 ? 'row' : 'column',
+    alignItems: 'center',
+    gap: 10,
+  },
+  flexGrow: {
+    flex: 1,
+  },
+  clientButtonWrapper: {
+    width: Dimensions.get('window').width > 768 ? 'auto' : '100%',
+    marginTop: Dimensions.get('window').width > 768 ? 0 : 8,
+  },
+  addClientButton: {
+    backgroundColor: '#3498db',
+    borderRadius: 8,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minWidth: Dimensions.get('window').width > 768 ? 150 : '100%',
+  },
+  addClientButtonText: {
+    color: 'white',
+    fontSize: 14,
+    fontWeight: '600',
+    marginLeft: 8,
   },
   scrollContainer: {
     padding: 16,
