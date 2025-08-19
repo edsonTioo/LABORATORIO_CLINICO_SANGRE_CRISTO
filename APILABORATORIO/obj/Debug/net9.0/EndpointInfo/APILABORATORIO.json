@@ -1,0 +1,4121 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "Laboratorio Clínico API",
+    "description": "API para gestión de laboratorio clínico",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/Auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ControllerAnulador/anular-orden/{idOrden}": {
+      "put": {
+        "tags": [
+          "ControllerAnulador"
+        ],
+        "parameters": [
+          {
+            "name": "idOrden",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ControllerAnulador/estado-orden/{idOrden}": {
+      "get": {
+        "tags": [
+          "ControllerAnulador"
+        ],
+        "parameters": [
+          {
+            "name": "idOrden",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ControllerAnulador/ordenes-anuladas": {
+      "get": {
+        "tags": [
+          "ControllerAnulador"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Factura": {
+      "post": {
+        "tags": [
+          "Factura"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FacturaDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FacturaDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FacturaDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Factura/clientes-con-ordenes-pendientes": {
+      "get": {
+        "tags": [
+          "Factura"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Factura/examenes-pendientes/{idcliente}": {
+      "get": {
+        "tags": [
+          "Factura"
+        ],
+        "parameters": [
+          {
+            "name": "idcliente",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Factura/parametros-por-tipoexamen/{idTipoExamen}": {
+      "get": {
+        "tags": [
+          "Factura"
+        ],
+        "parameters": [
+          {
+            "name": "idTipoExamen",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Graficos/OrdenesPendientes": {
+      "get": {
+        "tags": [
+          "Graficos"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Graficos/TotalClientes": {
+      "get": {
+        "tags": [
+          "Graficos"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Graficos/TotalMedicos": {
+      "get": {
+        "tags": [
+          "Graficos"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Graficos/Anual/{year}": {
+      "get": {
+        "tags": [
+          "Graficos"
+        ],
+        "parameters": [
+          {
+            "name": "year",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "number",
+                    "format": "double"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "number",
+                    "format": "double"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "number",
+                    "format": "double"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Graficos/MedicosConMasExamenes": {
+      "get": {
+        "tags": [
+          "Graficos"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MedicoExamenesDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MedicoExamenesDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MedicoExamenesDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Graficos/GananciasMensuales": {
+      "get": {
+        "tags": [
+          "Graficos"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "number",
+                    "format": "double"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "number",
+                    "format": "double"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "number",
+                    "format": "double"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Graficos/ExamenesMasSolicitados": {
+      "get": {
+        "tags": [
+          "Graficos"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Graficos/OrdenesPorEstado": {
+      "get": {
+        "tags": [
+          "Graficos"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Graficos/DemografiaClientes": {
+      "get": {
+        "tags": [
+          "Graficos"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Graficos/PacientesFrecuentes": {
+      "get": {
+        "tags": [
+          "Graficos"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Graficos/IngresosPorExamen": {
+      "get": {
+        "tags": [
+          "Graficos"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Graficos/ExamenesRecientes": {
+      "get": {
+        "tags": [
+          "Graficos"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Graficos/TendenciaExamenActual": {
+      "get": {
+        "tags": [
+          "Graficos"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Heatmap/OrdenesPorFecha": {
+      "get": {
+        "tags": [
+          "Heatmap"
+        ],
+        "parameters": [
+          {
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HeatmapData"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HeatmapData"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HeatmapData"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Heatmap/ExamenesPorFecha": {
+      "get": {
+        "tags": [
+          "Heatmap"
+        ],
+        "parameters": [
+          {
+            "name": "startDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HeatmapData"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HeatmapData"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HeatmapData"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/HistorialClinico/por-nombre": {
+      "get": {
+        "tags": [
+          "HistorialClinico"
+        ],
+        "parameters": [
+          {
+            "name": "nombre",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ImprimirResultados/buscar-paciente": {
+      "get": {
+        "tags": [
+          "ImprimirResultados"
+        ],
+        "parameters": [
+          {
+            "name": "nombre",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ImprimirResultados/examenes-paciente/{idCliente}": {
+      "get": {
+        "tags": [
+          "ImprimirResultados"
+        ],
+        "parameters": [
+          {
+            "name": "idCliente",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ImprimirResultados/generar-reporte/{idDetalleOrden}": {
+      "get": {
+        "tags": [
+          "ImprimirResultados"
+        ],
+        "parameters": [
+          {
+            "name": "idDetalleOrden",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ImprimirResultados/generar-reporte-completo/{idCliente}": {
+      "get": {
+        "tags": [
+          "ImprimirResultados"
+        ],
+        "parameters": [
+          {
+            "name": "idCliente",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ImprimirResultados/generar-reporte-firma/{idDetalleOrden}": {
+      "get": {
+        "tags": [
+          "ImprimirResultados"
+        ],
+        "parameters": [
+          {
+            "name": "idDetalleOrden",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ImprimirResultados/generar-reporte-completo-firma/{idCliente}": {
+      "get": {
+        "tags": [
+          "ImprimirResultados"
+        ],
+        "parameters": [
+          {
+            "name": "idCliente",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MedicoPassword/{id}": {
+      "put": {
+        "tags": [
+          "MedicoPassword"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePasswordDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePasswordDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePasswordDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MedicoUser": {
+      "get": {
+        "tags": [
+          "MedicoUser"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MedicoDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MedicoDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MedicoDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "MedicoUser"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MedicoInputDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MedicoInputDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MedicoInputDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MedicoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MedicoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MedicoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/MedicoUser/{id}": {
+      "get": {
+        "tags": [
+          "MedicoUser"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MedicoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MedicoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MedicoDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MedicoUser"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MedicoInputDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MedicoInputDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MedicoInputDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MedicoUser"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Orden/{idOrden}": {
+      "get": {
+        "tags": [
+          "MostrarResultados"
+        ],
+        "parameters": [
+          {
+            "name": "idOrden",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultadoExamenCompletoDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultadoExamenCompletoDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultadoExamenCompletoDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Muestra": {
+      "get": {
+        "tags": [
+          "Muestra"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Muestra"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Muestra"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Muestra"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Muestra"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Muestra"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Muestra"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Muestra"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Muestra"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Muestra"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Muestra"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Muestra/{id}": {
+      "get": {
+        "tags": [
+          "Muestra"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Muestra"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Muestra"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Muestra"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Muestra"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Muestra"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Muestra"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Muestra"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Muestra"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Orden": {
+      "post": {
+        "tags": [
+          "Orden"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrdenDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrdenDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrdenDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Orden/{id}": {
+      "get": {
+        "tags": [
+          "Orden"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Orden"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Ordenes/ordenes-con-detalles": {
+      "get": {
+        "tags": [
+          "Ordenes"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Ordenes/eliminar-detalle/{idDetalle}": {
+      "delete": {
+        "tags": [
+          "Ordenes"
+        ],
+        "parameters": [
+          {
+            "name": "idDetalle",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Ordenes/anular-orden/{idOrden}": {
+      "put": {
+        "tags": [
+          "Ordenes"
+        ],
+        "parameters": [
+          {
+            "name": "idOrden",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Ordenes/detalles-orden/{idOrden}": {
+      "get": {
+        "tags": [
+          "Ordenes"
+        ],
+        "parameters": [
+          {
+            "name": "idOrden",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Ordenes/agregar-detalle/{idOrden}": {
+      "post": {
+        "tags": [
+          "Ordenes"
+        ],
+        "parameters": [
+          {
+            "name": "idOrden",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DetalleOrdenDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DetalleOrdenDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DetalleOrdenDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Paciente": {
+      "get": {
+        "tags": [
+          "Paciente"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Cliente"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Cliente"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Cliente"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Paciente"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PacienteDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PacienteDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PacienteDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Paciente/{id}": {
+      "get": {
+        "tags": [
+          "Paciente"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cliente"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cliente"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cliente"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Paciente"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PacienteDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PacienteDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PacienteDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Paciente"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Parametros": {
+      "get": {
+        "tags": [
+          "Parametros"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ParametroDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ParametroDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ParametroDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Parametros"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ParametroDto2"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ParametroDto2"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ParametroDto2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Parametros/{id}": {
+      "get": {
+        "tags": [
+          "Parametros"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Parametro"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Parametro"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Parametro"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Parametros"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ParametroDto2"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ParametroDto2"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ParametroDto2"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Parametros"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ReporteFactura/factura/{id}": {
+      "get": {
+        "tags": [
+          "ReporteFactura"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ReporteGanancias/generar": {
+      "get": {
+        "tags": [
+          "ReporteGanancias"
+        ],
+        "parameters": [
+          {
+            "name": "fechaInicio",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fechaFin",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ReporteGananciasExamen/reporte-ingresos": {
+      "get": {
+        "tags": [
+          "ReporteGananciasExamen"
+        ],
+        "parameters": [
+          {
+            "name": "fechaInicio",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "fechaFin",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ReportePaciente/PacientesRegistrados": {
+      "get": {
+        "tags": [
+          "ReportePaciente"
+        ],
+        "parameters": [
+          {
+            "name": "fechaInicioNacimiento",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "fechaFinNacimiento",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "orden",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "mayor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ReportePacienteMasFacturas/PacienteConMasExamenes": {
+      "get": {
+        "tags": [
+          "ReportePacienteMasFacturas"
+        ],
+        "parameters": [
+          {
+            "name": "fechaInicio",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "fechaFin",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ReportePagosPendientes/PagosPendientes": {
+      "get": {
+        "tags": [
+          "ReportePagosPendientes"
+        ],
+        "parameters": [
+          {
+            "name": "fechaInicio",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "fechaFin",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ReportesMedicos/top-medicos": {
+      "get": {
+        "tags": [
+          "ReportesMedicos"
+        ],
+        "parameters": [
+          {
+            "name": "fechaInicio",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "fechaFin",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          },
+          {
+            "name": "idTipoExamen",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TopMedicoDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TopMedicoDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TopMedicoDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ReportesMedicos/top-medicos-pdf": {
+      "get": {
+        "tags": [
+          "ReportesMedicos"
+        ],
+        "parameters": [
+          {
+            "name": "fechaInicio",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "fechaFin",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          },
+          {
+            "name": "idTipoExamen",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Restablecer/solicitar": {
+      "post": {
+        "tags": [
+          "Restablecer"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SolicitudRestablecimientoDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SolicitudRestablecimientoDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SolicitudRestablecimientoDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Resultado/ClientesPendientes": {
+      "get": {
+        "tags": [
+          "Resultado"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClientePendienteResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClientePendienteResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClientePendienteResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Resultado/ParametrosPorExamen": {
+      "get": {
+        "tags": [
+          "Resultado"
+        ],
+        "parameters": [
+          {
+            "name": "nombreCliente",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nombreExamen",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Resultado/{nombreCliente}": {
+      "get": {
+        "tags": [
+          "Resultado"
+        ],
+        "parameters": [
+          {
+            "name": "nombreCliente",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Resultado": {
+      "post": {
+        "tags": [
+          "Resultado"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ResultadoRequest"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ResultadoRequest"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ResultadoRequest"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultadoExaman"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultadoExaman"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultadoExaman"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Resultado/orden/{idOrden}": {
+      "get": {
+        "tags": [
+          "Resultado"
+        ],
+        "parameters": [
+          {
+            "name": "idOrden",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResultadoExaman"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResultadoExaman"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResultadoExaman"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/TipoExamen": {
+      "get": {
+        "tags": [
+          "TipoExamen"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipoExaman"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipoExaman"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TipoExaman"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "TipoExamen"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoexamenDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoexamenDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoexamenDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/TipoExamen/{id}": {
+      "get": {
+        "tags": [
+          "TipoExamen"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoExaman"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoExaman"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoExaman"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "TipoExamen"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoExaman"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoExaman"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoExaman"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TipoExamen"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/TopExamenes/top-examenes": {
+      "get": {
+        "tags": [
+          "TopExamenes"
+        ],
+        "parameters": [
+          {
+            "name": "fechaInicio",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "fechaFin",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 5
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/TopExamenes/top-examenes-pdf": {
+      "get": {
+        "tags": [
+          "TopExamenes"
+        ],
+        "parameters": [
+          {
+            "name": "fechaInicio",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "fechaFin",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 5
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UpdateResult/conResultados": {
+      "get": {
+        "tags": [
+          "UpdateResult"
+        ],
+        "parameters": [
+          {
+            "name": "idCliente",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClienteConResultadosDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClienteConResultadosDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClienteConResultadosDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/UpdateResult/{id}": {
+      "put": {
+        "tags": [
+          "UpdateResult"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResultadoUpdateDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResultadoUpdateDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResultadoUpdateDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/WeatherForecast": {
+      "get": {
+        "tags": [
+          "WeatherForecast"
+        ],
+        "operationId": "GetWeatherForecast",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Cliente": {
+        "type": "object",
+        "properties": {
+          "idcliente": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaNacimiento": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "genero": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefono": {
+            "type": "string",
+            "nullable": true
+          },
+          "facturas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Factura"
+            },
+            "nullable": true
+          },
+          "ordens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Orden"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ClienteConResultadosDTO": {
+        "type": "object",
+        "properties": {
+          "idCliente": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "ordenes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrdenConResultadosDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ClientePendienteResponse": {
+        "type": "object",
+        "properties": {
+          "idCliente": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombreCliente": {
+            "type": "string",
+            "nullable": true
+          },
+          "ordenesPendientes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrdenPendienteResponse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DetalleFactura": {
+        "type": "object",
+        "properties": {
+          "iddetalleFactura": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idfactura": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "iddetalleOrden": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "idparametro": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "idtipoExamen": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "subtotal": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "precio": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "nombreParametro": {
+            "type": "string",
+            "nullable": true
+          },
+          "iddetalleOrdenNavigation": {
+            "$ref": "#/components/schemas/DetalleOrden"
+          },
+          "idfacturaNavigation": {
+            "$ref": "#/components/schemas/Factura"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DetalleOrden": {
+        "type": "object",
+        "properties": {
+          "iddetalleOrden": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idorden": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "idtipoExamen": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "idmuestra": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detalleFacturas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DetalleFactura"
+            },
+            "nullable": true
+          },
+          "idmuestraNavigation": {
+            "$ref": "#/components/schemas/Muestra"
+          },
+          "idordenNavigation": {
+            "$ref": "#/components/schemas/Orden"
+          },
+          "idtipoExamenNavigation": {
+            "$ref": "#/components/schemas/TipoExaman"
+          },
+          "resultadoExamen": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResultadoExaman"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DetalleOrdenDTO": {
+        "type": "object",
+        "properties": {
+          "idtipoExamen": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idmuestra": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DetalleOrdenDto": {
+        "type": "object",
+        "properties": {
+          "idtipoExamen": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idmuestra": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DetallefacturaDto": {
+        "type": "object",
+        "properties": {
+          "iddetalleOrden": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "subtotal": {
+            "type": "number",
+            "format": "double"
+          },
+          "precio": {
+            "type": "number",
+            "format": "double"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipo": {
+            "type": "string",
+            "nullable": true
+          },
+          "idparametro": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "idtipoExamen": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ExamenConResultadosDTO": {
+        "type": "object",
+        "properties": {
+          "idExamen": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombreExamen": {
+            "type": "string",
+            "nullable": true
+          },
+          "resultados": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResultadoDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Factura": {
+        "type": "object",
+        "properties": {
+          "idfactura": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idcliente": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "fechaFactura": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "total": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "idmedico": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "tipoFacturacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "detalleFacturas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DetalleFactura"
+            },
+            "nullable": true
+          },
+          "idclienteNavigation": {
+            "$ref": "#/components/schemas/Cliente"
+          },
+          "idmedicoNavigation": {
+            "$ref": "#/components/schemas/Medico"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FacturaDto": {
+        "type": "object",
+        "properties": {
+          "idcliente": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaFactura": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "total": {
+            "type": "number",
+            "format": "double"
+          },
+          "idmedico": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipoFacturacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "detalleFacturas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DetallefacturaDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "HeatmapData": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LoginDto": {
+        "type": "object",
+        "properties": {
+          "correo": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Medico": {
+        "type": "object",
+        "properties": {
+          "idmedico": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "especialidad": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefono": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "rol": {
+            "type": "string",
+            "nullable": true
+          },
+          "correo": {
+            "type": "string",
+            "nullable": true
+          },
+          "resetToken": {
+            "type": "string",
+            "nullable": true
+          },
+          "resetTokenExpires": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "contrasenaTemporal": {
+            "type": "boolean"
+          },
+          "facturas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Factura"
+            },
+            "nullable": true
+          },
+          "ordens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Orden"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MedicoDto": {
+        "type": "object",
+        "properties": {
+          "idmedico": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "especialidad": {
+            "type": "string",
+            "nullable": true
+          },
+          "cedula": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "direccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefono": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "correo": {
+            "type": "string",
+            "nullable": true
+          },
+          "rol": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MedicoExamenesDTO": {
+        "type": "object",
+        "properties": {
+          "nombreMedico": {
+            "type": "string",
+            "nullable": true
+          },
+          "cantidadExamenes": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MedicoInputDto": {
+        "type": "object",
+        "properties": {
+          "idmedico": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "especialidad": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefono": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "correo": {
+            "type": "string",
+            "nullable": true
+          },
+          "rol": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Muestra": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "muestra1": {
+            "type": "string",
+            "nullable": true
+          },
+          "detalleOrdens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DetalleOrden"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Orden": {
+        "type": "object",
+        "properties": {
+          "idorden": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idcliente": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "idmedico": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "fechaOrden": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaEntrega": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "numeroMuestra": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "detalleOrdens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DetalleOrden"
+            },
+            "nullable": true
+          },
+          "idclienteNavigation": {
+            "$ref": "#/components/schemas/Cliente"
+          },
+          "idmedicoNavigation": {
+            "$ref": "#/components/schemas/Medico"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrdenConResultadosDTO": {
+        "type": "object",
+        "properties": {
+          "idOrden": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaOrden": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "examenes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExamenConResultadosDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrdenDto": {
+        "type": "object",
+        "properties": {
+          "idcliente": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "idmedico": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "fechaOrden": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fechaEntrega": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "numeroMuestra": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "detalleOrdens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DetalleOrdenDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrdenPendienteResponse": {
+        "type": "object",
+        "properties": {
+          "idOrden": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaOrden": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fechaEntrega": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "examenesPendientes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PacienteDto": {
+        "type": "object",
+        "properties": {
+          "idcliente": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaNacimiento": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "genero": {
+            "type": "string",
+            "nullable": true
+          },
+          "direccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefono": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "cedula": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Parametro": {
+        "type": "object",
+        "properties": {
+          "idparametro": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "idtipoExamen": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nombreParametro": {
+            "type": "string",
+            "nullable": true
+          },
+          "subtitulo": {
+            "type": "string",
+            "nullable": true
+          },
+          "unidadMedida": {
+            "type": "string",
+            "nullable": true
+          },
+          "valorReferencia": {
+            "type": "string",
+            "nullable": true
+          },
+          "opcionesFijas": {
+            "type": "string",
+            "nullable": true
+          },
+          "precio": {
+            "type": "number",
+            "format": "double"
+          },
+          "idtipoExamenNavigation": {
+            "$ref": "#/components/schemas/TipoExaman"
+          },
+          "resultadoExamen": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResultadoExaman"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ParametroDto": {
+        "type": "object",
+        "properties": {
+          "idparametro": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idtipoExamen": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nombreParametro": {
+            "type": "string",
+            "nullable": true
+          },
+          "subtitulo": {
+            "type": "string",
+            "nullable": true
+          },
+          "unidadMedida": {
+            "type": "string",
+            "nullable": true
+          },
+          "valorReferencia": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipoExamen": {
+            "$ref": "#/components/schemas/TipoExaman"
+          },
+          "nombreExamen": {
+            "type": "string",
+            "nullable": true
+          },
+          "opcionesFijas": {
+            "type": "string",
+            "nullable": true
+          },
+          "precio": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ParametroDto2": {
+        "type": "object",
+        "properties": {
+          "idparametro": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idtipoExamen": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "nombreParametro": {
+            "type": "string",
+            "nullable": true
+          },
+          "subtitulo": {
+            "type": "string",
+            "nullable": true
+          },
+          "unidadMedida": {
+            "type": "string",
+            "nullable": true
+          },
+          "opcionesFijas": {
+            "type": "string",
+            "nullable": true
+          },
+          "valorReferencia": {
+            "type": "string",
+            "nullable": true
+          },
+          "precio": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResultadoDTO": {
+        "type": "object",
+        "properties": {
+          "idResultado": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombreParametro": {
+            "type": "string",
+            "nullable": true
+          },
+          "resultado": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaResultado": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "opcionesFijas": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResultadoExaman": {
+        "type": "object",
+        "properties": {
+          "idresultado": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "iddetalleOrden": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "idparametro": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "resultado": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaResultado": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "nombreParametro": {
+            "type": "string",
+            "nullable": true
+          },
+          "iddetalleOrdenNavigation": {
+            "$ref": "#/components/schemas/DetalleOrden"
+          },
+          "idparametroNavigation": {
+            "$ref": "#/components/schemas/Parametro"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResultadoExamenCompletoDto": {
+        "type": "object",
+        "properties": {
+          "idOrden": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numeroOrden": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaOrden": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "estado": {
+            "type": "string",
+            "nullable": true
+          },
+          "paciente": {
+            "$ref": "#/components/schemas/ResultadoPacienteDto"
+          },
+          "medico": {
+            "$ref": "#/components/schemas/ResultadoMedicoDto"
+          },
+          "examenes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResultadoExamenDetalleDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResultadoExamenDetalleDto": {
+        "type": "object",
+        "properties": {
+          "idDetalleOrden": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipoExamen": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcionExamen": {
+            "type": "string",
+            "nullable": true
+          },
+          "muestra": {
+            "type": "string",
+            "nullable": true
+          },
+          "fechaResultado": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "parametros": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResultadoParametroDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResultadoMedicoDto": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "especialidad": {
+            "type": "string",
+            "nullable": true
+          },
+          "cedula": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResultadoPacienteDto": {
+        "type": "object",
+        "properties": {
+          "idCliente": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "cedula": {
+            "type": "string",
+            "nullable": true
+          },
+          "genero": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefono": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResultadoParametroDto": {
+        "type": "object",
+        "properties": {
+          "idParametro": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombreParametro": {
+            "type": "string",
+            "nullable": true
+          },
+          "resultado": {
+            "type": "string",
+            "nullable": true
+          },
+          "unidadMedida": {
+            "type": "string",
+            "nullable": true
+          },
+          "valorReferencia": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResultadoRequest": {
+        "type": "object",
+        "properties": {
+          "idDetalleOrden": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idParametro": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "resultado": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombreParametro": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResultadoUpdateDTO": {
+        "type": "object",
+        "properties": {
+          "resultado": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SolicitudRestablecimientoDto": {
+        "required": [
+          "correo"
+        ],
+        "type": "object",
+        "properties": {
+          "correo": {
+            "minLength": 1,
+            "type": "string",
+            "format": "email"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TipoExaman": {
+        "type": "object",
+        "properties": {
+          "idtipoExamen": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombreExamen": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "subtitulos": {
+            "type": "string",
+            "nullable": true
+          },
+          "precio": {
+            "type": "number",
+            "format": "double"
+          },
+          "detalleOrdens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DetalleOrden"
+            },
+            "nullable": true
+          },
+          "parametros": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Parametro"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TipoexamenDto": {
+        "type": "object",
+        "properties": {
+          "idtipoExamen": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombreExamen": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "subtitulos": {
+            "type": "string",
+            "nullable": true
+          },
+          "precio": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TopMedicoDto": {
+        "type": "object",
+        "properties": {
+          "medico": {
+            "$ref": "#/components/schemas/Medico"
+          },
+          "totalExamenes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalOrdenes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "porcentajeTotal": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdatePasswordDto": {
+        "type": "object",
+        "properties": {
+          "password": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "WeatherForecast": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "temperatureC": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "temperatureF": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "summary": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "description": "JWT Authorization header using the Bearer scheme",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}

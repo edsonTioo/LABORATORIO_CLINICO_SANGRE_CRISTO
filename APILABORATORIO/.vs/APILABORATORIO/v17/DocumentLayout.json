@@ -1,0 +1,123 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\DELL\\Desktop\\LaboratorioClinico\\APILABORATORIO\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{1D93686F-C4E9-4C3C-ACB2-A5A0E3E626AC}|APILABORATORIO.csproj|c:\\users\\dell\\desktop\\laboratorioclinico\\apilaboratorio\\controllers\\parametroscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1D93686F-C4E9-4C3C-ACB2-A5A0E3E626AC}|APILABORATORIO.csproj|solutionrelative:controllers\\parametroscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D93686F-C4E9-4C3C-ACB2-A5A0E3E626AC}|APILABORATORIO.csproj|c:\\users\\dell\\desktop\\laboratorioclinico\\apilaboratorio\\controllers\\mostrarresultadoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1D93686F-C4E9-4C3C-ACB2-A5A0E3E626AC}|APILABORATORIO.csproj|solutionrelative:controllers\\mostrarresultadoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D93686F-C4E9-4C3C-ACB2-A5A0E3E626AC}|APILABORATORIO.csproj|c:\\users\\dell\\desktop\\laboratorioclinico\\apilaboratorio\\controllers\\resultadocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1D93686F-C4E9-4C3C-ACB2-A5A0E3E626AC}|APILABORATORIO.csproj|solutionrelative:controllers\\resultadocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D93686F-C4E9-4C3C-ACB2-A5A0E3E626AC}|APILABORATORIO.csproj|c:\\users\\dell\\desktop\\laboratorioclinico\\apilaboratorio\\models\\detalleorden.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1D93686F-C4E9-4C3C-ACB2-A5A0E3E626AC}|APILABORATORIO.csproj|solutionrelative:models\\detalleorden.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D93686F-C4E9-4C3C-ACB2-A5A0E3E626AC}|APILABORATORIO.csproj|c:\\users\\dell\\desktop\\laboratorioclinico\\apilaboratorio\\controllers\\ordencontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1D93686F-C4E9-4C3C-ACB2-A5A0E3E626AC}|APILABORATORIO.csproj|solutionrelative:controllers\\ordencontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1D93686F-C4E9-4C3C-ACB2-A5A0E3E626AC}|APILABORATORIO.csproj|c:\\users\\dell\\desktop\\laboratorioclinico\\apilaboratorio\\models\\parametro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1D93686F-C4E9-4C3C-ACB2-A5A0E3E626AC}|APILABORATORIO.csproj|solutionrelative:models\\parametro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 151,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ParametrosController.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\LaboratorioClinico\\APILABORATORIO\\Controllers\\ParametrosController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ParametrosController.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\LaboratorioClinico\\APILABORATORIO\\Controllers\\ParametrosController.cs",
+              "RelativeToolTip": "Controllers\\ParametrosController.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAuwDgAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-21T19:54:10.334Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "OrdenController.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\LaboratorioClinico\\APILABORATORIO\\Controllers\\OrdenController.cs",
+              "RelativeDocumentMoniker": "Controllers\\OrdenController.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\LaboratorioClinico\\APILABORATORIO\\Controllers\\OrdenController.cs",
+              "RelativeToolTip": "Controllers\\OrdenController.cs",
+              "ViewState": "AgIAAF0AAAAAAAAAAAAAAGQAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-21T19:52:48.445Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MostrarResultadosController.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\LaboratorioClinico\\APILABORATORIO\\Controllers\\MostrarResultadosController.cs",
+              "RelativeDocumentMoniker": "Controllers\\MostrarResultadosController.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\LaboratorioClinico\\APILABORATORIO\\Controllers\\MostrarResultadosController.cs",
+              "RelativeToolTip": "Controllers\\MostrarResultadosController.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAAAADYAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-21T19:52:34.965Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Parametro.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\LaboratorioClinico\\APILABORATORIO\\Models\\Parametro.cs",
+              "RelativeDocumentMoniker": "Models\\Parametro.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\LaboratorioClinico\\APILABORATORIO\\Models\\Parametro.cs",
+              "RelativeToolTip": "Models\\Parametro.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-21T19:51:56.421Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ResultadoController.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\LaboratorioClinico\\APILABORATORIO\\Controllers\\ResultadoController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ResultadoController.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\LaboratorioClinico\\APILABORATORIO\\Controllers\\ResultadoController.cs",
+              "RelativeToolTip": "Controllers\\ResultadoController.cs",
+              "ViewState": "AgIAADgAAAAAAAAAAAAAAE0AAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-21T19:50:29.675Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DetalleOrden.cs",
+              "DocumentMoniker": "C:\\Users\\DELL\\Desktop\\LaboratorioClinico\\APILABORATORIO\\Models\\DetalleOrden.cs",
+              "RelativeDocumentMoniker": "Models\\DetalleOrden.cs",
+              "ToolTip": "C:\\Users\\DELL\\Desktop\\LaboratorioClinico\\APILABORATORIO\\Models\\DetalleOrden.cs",
+              "RelativeToolTip": "Models\\DetalleOrden.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-21T19:49:47.5Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
