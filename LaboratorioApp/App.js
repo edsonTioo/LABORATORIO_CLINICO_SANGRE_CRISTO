@@ -410,44 +410,30 @@ export default function App() {
   const [userData, setUserData] = useState(null);
 const [isLoading, setIsLoading] = useState(true);
  // Verificar autenticación al iniciar
-  useEffect(() => {
-    const checkAuthStatus = async () => {
-      try {
-        const storedData = await AsyncStorage.getItem('userData');
-        if (storedData) {
-          const parsedData = JSON.parse(storedData);
-          setUserData(parsedData);
-          setIsAuthenticated(true);
-        }
-      } catch (error) {
-        console.error("Error al recuperar sesión:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+// No verificar autenticación al iniciar, siempre comenzar sin autenticar
+useEffect(() => {
+  setIsLoading(false);
+}, []);
 
-    checkAuthStatus();
-  }, []);
+const handleLoginSuccess = async (data) => {
+  try {
+    // NO guardar nada en AsyncStorage, solo establecer el estado
+    setUserData(data);
+    setIsAuthenticated(true);
+  } catch (error) {
+    console.error("Error en login:", error);
+  }
+};
 
-  const handleLoginSuccess = async (data) => {
-    try {
-      await AsyncStorage.setItem('userData', JSON.stringify(data));
-      setUserData(data);
-      setIsAuthenticated(true);
-    } catch (error) {
-      console.error("Error al guardar sesión:", error);
-    }
-  };
-
-  const handleLogout = async () => {
-    try {
-      await AsyncStorage.removeItem('userData');
-      setIsAuthenticated(false);
-      setUserData(null);
-    } catch (error) {
-      console.error("Error al cerrar sesión:", error);
-    }
-  };
+const handleLogout = async () => {
+  try {
+    // No hay nada que eliminar del almacenamiento
+    setIsAuthenticated(false);
+    setUserData(null);
+  } catch (error) {
+    console.error("Error al cerrar sesión:", error);
+  }
+};
 
   if (isLoading) {
     return (

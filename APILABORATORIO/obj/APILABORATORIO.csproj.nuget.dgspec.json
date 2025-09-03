@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\edson\\Downloads\\LaboratorioClinico\\LaboratorioClinico\\APILABORATORIO\\APILABORATORIO.csproj": {}
+    "C:\\Users\\DELL\\Downloads\\LABORATORIO_CLINICO_SANGRE_CRISTO\\APILABORATORIO\\APILABORATORIO.csproj": {}
   },
   "projects": {
-    "C:\\Users\\edson\\Downloads\\LaboratorioClinico\\LaboratorioClinico\\APILABORATORIO\\APILABORATORIO.csproj": {
+    "C:\\Users\\DELL\\Downloads\\LABORATORIO_CLINICO_SANGRE_CRISTO\\APILABORATORIO\\APILABORATORIO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\edson\\Downloads\\LaboratorioClinico\\LaboratorioClinico\\APILABORATORIO\\APILABORATORIO.csproj",
+        "projectUniqueName": "C:\\Users\\DELL\\Downloads\\LABORATORIO_CLINICO_SANGRE_CRISTO\\APILABORATORIO\\APILABORATORIO.csproj",
         "projectName": "APILABORATORIO",
-        "projectPath": "C:\\Users\\edson\\Downloads\\LaboratorioClinico\\LaboratorioClinico\\APILABORATORIO\\APILABORATORIO.csproj",
-        "packagesPath": "C:\\Users\\edson\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\edson\\Downloads\\LaboratorioClinico\\LaboratorioClinico\\APILABORATORIO\\obj\\",
+        "projectPath": "C:\\Users\\DELL\\Downloads\\LABORATORIO_CLINICO_SANGRE_CRISTO\\APILABORATORIO\\APILABORATORIO.csproj",
+        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\DELL\\Downloads\\LABORATORIO_CLINICO_SANGRE_CRISTO\\APILABORATORIO\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\edson\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -115,7 +115,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.205/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
