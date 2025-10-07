@@ -17,6 +17,9 @@ import Toast from "react-native-toast-message";
 import { Dropdown } from "react-native-element-dropdown";
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
 import withAutoRefresh from "./withAutoRefresh";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+
 
 const ResultadoScreen = () => {
   const [clientes, setClientes] = useState([]);
@@ -36,100 +39,115 @@ const ResultadoScreen = () => {
       ? "http://10.0.2.2:5090/api"
       : "http://localhost:5090/api";
 
-  const fetchClientes = async () => {
-    try {
-      setLoadingClients(true);
-      setRefreshing(true);
-      const response = await fetch(`${API_URL}/Resultado/ClientesPendientes`);
+      const fetchClientes = async () => {
+        try {
+          setLoadingClients(true);
+          setRefreshing(true);
+      
+          const token = await AsyncStorage.getItem("token");
+          if (!token) throw new Error("Falta token, inicia sesión");
+      
+          const response = await fetch(`${API_URL}/Resultado/ClientesPendientes`, {
+            headers: {
+              "Accept": "application/json",
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`,   // 👈 aquí el token
+            },
+          });
+      
+          if (!response.ok) {
+            throw new Error(`Error ${response.status}: ${response.statusText}`);
+          }
+      
+          const data = await response.json();
+          const clientesData = data.$values || data || [];
+      
+          const formattedClients = clientesData.map((cliente) => ({
+            label: cliente.nombreCliente,
+            value: cliente.nombreCliente,
+            idCliente: cliente.idCliente,
+            ordenes: (
+              cliente.ordenesPendientes?.$values || cliente.ordenesPendientes || []
+            ).map((orden) => ({
+              idOrden: orden.idOrden,
+              fechaOrden: orden.fechaOrden,
+              fechaEntrega: orden.fechaEntrega,
+              examenesPendientes:
+                orden.examenesPendientes?.$values || orden.examenesPendientes || [],
+            })),
+          }));
+      
+          setClientes(formattedClients);
+          setError("");
+        } catch (error) {
+          console.error("Error fetching clientes:", error);
+          setError("Error al cargar la lista de clientes");
+        } finally {
+          setLoadingClients(false);
+          setRefreshing(false);
+        }
+      };
 
-      if (!response.ok) {
-        throw new Error(`Error ${response.status}: ${response.statusText}`);
-      }
-
-      const data = await response.json();
-      const clientesData = data.$values || data || [];
-
-      const formattedClients = clientesData.map((cliente) => ({
-        label: cliente.nombreCliente,
-        value: cliente.nombreCliente,
-        idCliente: cliente.idCliente,
-        ordenes: (
-          cliente.ordenesPendientes?.$values ||
-          cliente.ordenesPendientes ||
-          []
-        ).map((orden) => ({
-          idOrden: orden.idOrden,
-          fechaOrden: orden.fechaOrden,
-          fechaEntrega: orden.fechaEntrega,
-          examenesPendientes:
-            orden.examenesPendientes?.$values || orden.examenesPendientes || [],
-        })),
-      }));
-
-      setClientes(formattedClients);
-      setError("");
-    } catch (error) {
-      console.error("Error fetching clientes:", error);
-      setError("Error al cargar la lista de clientes");
-    } finally {
-      setLoadingClients(false);
-      setRefreshing(false);
-    }
-  };
-
-  const fetchParametrosExamen = useCallback(async () => {
-    if (!examenSeleccionado || !clienteSeleccionado) return;
-
-    try {
-      setLoading(true);
-      const response = await fetch(
-        `${API_URL}/Resultado/ParametrosPorExamen?nombreCliente=${encodeURIComponent(
-          clienteSeleccionado.label
-        )}&nombreExamen=${encodeURIComponent(examenSeleccionado.value)}`
-      );
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || `Error ${response.status}`);
-      }
-
-      const data = await response.json();
-      const parametrosData = data.parametros?.$values || [];
-
-      if (!parametrosData || parametrosData.length === 0) {
-        throw new Error("No se encontraron parámetros para este examen");
-      }
-
-      const parametrosInicializados = parametrosData.map((p) => ({
-        idResultado: `${p.idDetalleOrden}-${p.idParametro}`,
-        idDetalleOrden: p.idDetalleOrden,
-        idParametro: p.idParametro,
-        nombreParametro: p.nombreParametro,
-        resultado: "",
-        opcionesFijas: p.opcionesFijas,
-        unidadMedida: p.unidadMedida,
-        valorReferencia: p.valorReferencia,
-        nombreExamen: p.nombreExamen,
-      }));
-
-      setParametros(parametrosInicializados);
-
-      const initialResults = {};
-      parametrosData.forEach((param) => {
-        initialResults[param.idParametro] = "";
-      });
-      setResults(initialResults);
-    } catch (error) {
-      console.error("Error fetching parámetros:", error);
-      Alert.alert(
-        "Error",
-        error.message || "No se pudieron cargar los parámetros"
-      );
-      setParametros([]);
-    } finally {
-      setLoading(false);
-    }
-  }, [examenSeleccionado, clienteSeleccionado]);
+      const fetchParametrosExamen = useCallback(async () => {
+        if (!examenSeleccionado || !clienteSeleccionado) return;
+      
+        try {
+          setLoading(true);
+      
+          const token = await AsyncStorage.getItem("token");
+          if (!token) throw new Error("Falta token, inicia sesión");
+      
+          const url = `${API_URL}/Resultado/ParametrosPorExamen?nombreCliente=${encodeURIComponent(
+            clienteSeleccionado.label
+          )}&nombreExamen=${encodeURIComponent(examenSeleccionado.value)}`;
+      
+          const response = await fetch(url, {
+            headers: {
+              "Accept": "application/json",
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`,
+            },
+          });
+      
+          if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.message || `Error ${response.status}`);
+          }
+      
+          const data = await response.json();
+          const parametrosData = data.parametros?.$values || [];
+      
+          if (!parametrosData.length) {
+            throw new Error("No se encontraron parámetros para este examen");
+          }
+      
+          const parametrosInicializados = parametrosData.map((p) => ({
+            idResultado: `${p.idDetalleOrden}-${p.idParametro}`,
+            idDetalleOrden: p.idDetalleOrden,
+            idParametro: p.idParametro,
+            nombreParametro: p.nombreParametro,
+            resultado: "",
+            opcionesFijas: p.opcionesFijas,
+            unidadMedida: p.unidadMedida,
+            valorReferencia: p.valorReferencia,
+            nombreExamen: p.nombreExamen,
+          }));
+      
+          setParametros(parametrosInicializados);
+      
+          const initialResults = {};
+          parametrosData.forEach((param) => {
+            initialResults[param.idParametro] = "";
+          });
+          setResults(initialResults);
+        } catch (error) {
+          console.error("Error fetching parámetros:", error);
+          Alert.alert("Error", error.message || "No se pudieron cargar los parámetros");
+          setParametros([]);
+        } finally {
+          setLoading(false);
+        }
+      }, [examenSeleccionado, clienteSeleccionado]);
 
   const handleSeleccionCliente = useCallback((item) => {
     setClienteSeleccionado(item);
@@ -258,15 +276,16 @@ const ResultadoScreen = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,   // <-- aquí agregas el token
         },
         body: JSON.stringify(resultadosToSend),
       });
-
+      
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || "Error al guardar resultados");
       }
-
+      
       Toast.show({
         type: "success",
         text1: "✅ Éxito",
@@ -274,13 +293,13 @@ const ResultadoScreen = () => {
         position: "top",
         visibilityTime: 3000,
       });
-
+      
       setClienteSeleccionado(null);
       setExamenSeleccionado(null);
       setExamenes([]);
       setParametros([]);
       setResults({});
-
+      
       await fetchClientes();
     } catch (error) {
       console.error("Error guardando resultados:", error);

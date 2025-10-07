@@ -16,6 +16,7 @@
   import Toast from "react-native-toast-message";
   import RestablecerScreen from "./RestablecerScreen";
   import { MaterialIcons } from '@expo/vector-icons';
+  import AsyncStorage from "@react-native-async-storage/async-storage";
 
   const { width, height } = Dimensions.get("window");
 
@@ -81,10 +82,18 @@
         });
 
         const data = await response.json();
-
+        console.log("📦 Respuesta del login:", data);
+        console.log("🔑 Token detectado:", data.token);
         if (!response.ok) {
           throw new Error(data.message || "Credenciales incorrectas");
         }
+
+  // guardar token en AsyncStorage
+if (data.token) {
+  await AsyncStorage.setItem("token", data.token);
+} else {
+  console.error("❌ No se encontró 'token' en la respuesta");
+}
 
         onLoginSuccess({
           token: data.token,

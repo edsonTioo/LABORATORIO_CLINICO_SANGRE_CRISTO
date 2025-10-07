@@ -23,6 +23,7 @@ import { Dropdown } from "react-native-element-dropdown";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Toast from 'react-native-toast-message';
 import withAutoRefresh from './withAutoRefresh';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const API_BASE = Platform.OS === 'android'
   ? 'http://10.0.2.2:5090/api/Ordenes'
@@ -78,7 +79,12 @@ function GestionOrdenesScreen({ navigation }) {
 
   const cargarOrdenes = async () => {
     try {
-      const response = await fetch(`${API_BASE}/ordenes-con-detalles`);
+      const response = await fetch(`${API_BASE}/ordenes-con-detalles`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`, // ← aquí el token
+        },
+      });
       if (!response.ok) throw new Error('Error al obtener órdenes');
       const data = await response.json();
       setOrdenes(Array.isArray(data) ? data : (data.$values || []));
@@ -89,41 +95,51 @@ function GestionOrdenesScreen({ navigation }) {
   };
 
   const cargarExamenes = async () => {
-    try {
-      const response = await fetch(API_EXAMENES);
-      if (!response.ok) throw new Error('Error al obtener exámenes');
-      const data = await response.json();
-      const examenesData = Array.isArray(data) ? data : (data.$values || []);
-      setExamenes(examenesData.map(examen => ({
-        idTipoExamen: examen.idtipoExamen,
-        nombreExamen: examen.nombreExamen,
-        descripcion: examen.descripcion,
-        label: examen.nombreExamen,
-        value: examen.idtipoExamen
-      })));
-    } catch (error) {
-      console.error('Error al obtener exámenes:', error);
-      throw error;
-    }
-  };
+  try {
+    const response = await fetch(API_EXAMENES, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`, // ← token también aquí
+      },
+    });
+    if (!response.ok) throw new Error('Error al obtener exámenes');
+    const data = await response.json();
+    const examenesData = Array.isArray(data) ? data : (data.$values || []);
+    setExamenes(examenesData.map(examen => ({
+      idTipoExamen: examen.idtipoExamen,
+      nombreExamen: examen.nombreExamen,
+      descripcion: examen.descripcion,
+      label: examen.nombreExamen,
+      value: examen.idtipoExamen,
+    })));
+  } catch (error) {
+    console.error('Error al obtener exámenes:', error);
+    throw error;
+  }
+};
 
-  const cargarMuestras = async () => {
-    try {
-      const response = await fetch(API_MUESTRAS);
-      if (!response.ok) throw new Error('Error al obtener muestras');
-      const data = await response.json();
-      const muestrasData = Array.isArray(data) ? data : (data.$values || []);
-      setMuestras(muestrasData.map(muestra => ({
-        id: muestra.id,
-        muestra1: muestra.muestra1,
-        label: muestra.muestra1,
-        value: muestra.id
-      })));
-    } catch (error) {
-      console.error('Error al obtener muestras:', error);
-      throw error;
-    }
-  };
+const cargarMuestras = async () => {
+  try {
+    const response = await fetch(API_MUESTRAS, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`, // ← también aquí
+      },
+    });
+    if (!response.ok) throw new Error('Error al obtener muestras');
+    const data = await response.json();
+    const muestrasData = Array.isArray(data) ? data : (data.$values || []);
+    setMuestras(muestrasData.map(muestra => ({
+      id: muestra.id,
+      muestra1: muestra.muestra1,
+      label: muestra.muestra1,
+      value: muestra.id,
+    })));
+  } catch (error) {
+    console.error('Error al obtener muestras:', error);
+    throw error;
+  }
+};
 
   const handleRefresh = async () => {
     setRefreshing(true);
@@ -208,6 +224,7 @@ function GestionOrdenesScreen({ navigation }) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`, // ← agregado
         },
         body: JSON.stringify({
           idTipoExamen: nuevoDetalle.idTipoExamen,
@@ -255,6 +272,7 @@ function GestionOrdenesScreen({ navigation }) {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`, // ← agregado
         },
       });
 
@@ -303,6 +321,7 @@ function GestionOrdenesScreen({ navigation }) {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`, // ← agregado
         },
       });
 

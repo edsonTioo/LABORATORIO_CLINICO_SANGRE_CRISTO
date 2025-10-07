@@ -1,4 +1,5 @@
 ﻿using APILABORATORIO.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace LaboratorioClinico.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class OrdenController : ControllerBase

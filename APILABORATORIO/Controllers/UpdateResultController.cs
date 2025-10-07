@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace APILABORATORIO.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class UpdateResultController : ControllerBase

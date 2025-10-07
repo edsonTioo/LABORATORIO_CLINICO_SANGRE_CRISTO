@@ -1,4 +1,5 @@
 using APILABORATORIO.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuestPDF.Fluent;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace LaboratorioClinico.Controllers
 {
+    
     [ApiController]
     [Route("api/[controller]")]
     public class ReporteFacturaController : ControllerBase

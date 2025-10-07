@@ -13,6 +13,7 @@ import { Dropdown } from 'react-native-element-dropdown';
 import { DatePickerModal } from 'react-native-paper-dates';
 import { DataTable } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { format } from "date-fns";
 import {
   MaterialIcons,
@@ -70,18 +71,32 @@ const screenWidth = Dimensions.get('window').width;
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const token = await AsyncStorage.getItem("token");
+        console.log("🔑 Token usado en fetchData:", token);
+  
         const [medicosRes, clientesRes, muestrasRes, examenesRes] = await Promise.all([
-          fetch(API_URL_MEDICO).then(res => res.json()),
-          fetch(API_URL_CLIENTE).then(res => res.json()),
-          fetch(API_URL_MUESTRA).then(res => res.json()),
-          fetch(API_URL_TIPOEXAMEN).then(res => res.json())
+          fetch(API_URL_MEDICO, {
+            headers: { Authorization: `Bearer ${token}` }
+          }).then(res => res.json()),
+  
+          fetch(API_URL_CLIENTE, {
+            headers: { Authorization: `Bearer ${token}` }
+          }).then(res => res.json()),
+  
+          fetch(API_URL_MUESTRA, {
+            headers: { Authorization: `Bearer ${token}` }
+          }).then(res => res.json()),
+  
+          fetch(API_URL_TIPOEXAMEN, {
+            headers: { Authorization: `Bearer ${token}` }
+          }).then(res => res.json())
         ]);
-
+  
         setMedico(medicosRes.$values || []);
         setCliente(clientesRes.$values || []);
         setMuestra(muestrasRes.$values || []);
         setTipoExamen(examenesRes.$values || []);
-
+  
       } catch (err) {
         console.error("Error fetching data:", err);
         Toast.show({
@@ -91,7 +106,7 @@ const screenWidth = Dimensions.get('window').width;
         });
       }
     };
-
+  
     fetchData();
   }, []);
   const reiniciarFormulario = useCallback(() => {
@@ -309,9 +324,15 @@ const screenWidth = Dimensions.get('window').width;
   };
 
     try {
+      const token = await AsyncStorage.getItem("token");
+      if (!token) throw new Error("No hay token. Inicia sesión nuevamente.");
+
       const response = await fetch(API_URL_ORDEN, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
         body: JSON.stringify(ordenParaEnviar)
       });
 

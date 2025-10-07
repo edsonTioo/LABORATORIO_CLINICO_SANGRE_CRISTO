@@ -16,6 +16,7 @@ import ButtonGradient from "./ButtonGradient";
 import Toast from "react-native-toast-message";
 import RestablecerScreen from "./RestablecerScreen";
 import { MaterialIcons } from '@expo/vector-icons';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const { width, height } = Dimensions.get("window");
 
@@ -84,6 +85,8 @@ export default function LoginScreen({ navigation, onLoginSuccess }) {
       if (!response.ok) {
         throw new Error(data.message || "Credenciales incorrectas");
       }
+
+      await AsyncStorage.setItem("token", data.token);
 
       onLoginSuccess({
         token: data.token,

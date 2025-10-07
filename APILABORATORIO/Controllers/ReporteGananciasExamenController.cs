@@ -9,6 +9,7 @@ using System.Reflection;
 
 namespace LaboratorioClinico.Controllers
 {
+    
     [ApiController]
     [Route("api/[controller]")]
     public class ReporteGananciasExamenController : ControllerBase

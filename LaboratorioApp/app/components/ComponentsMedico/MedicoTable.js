@@ -13,6 +13,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { DataTable, Text } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import Toast from 'react-native-toast-message';
 
 
@@ -32,20 +33,32 @@ const MedicoTable = ({ route }) => {
         ? "http://10.0.2.2:5090/api/MedicoUser"
         : "http://localhost:5090/api/MedicoUser";
 
-    const fetchMedico = async () => {
-        try {
-            const response = await fetch(API_URL);
-            const data = await response.json();
-            setMedico(data.$values || []);
-            setFilteredMedico(data.$values || []);
-        } catch (error) {
-            console.error('Error al cargar el Medico:', error);
-            alert('Error al cargar el Medico. Verifica tu conexión a Internet o la URL de la API.');
-        } finally {
-            setLoading(false);
-        }
-    };
-
+        const fetchMedico = async () => {
+            try {
+                const token = await AsyncStorage.getItem("token");
+                console.log("🔑 Token usado en Médicos:", token);
+        
+                const response = await fetch(API_URL, {
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    }
+                });
+        
+                if (!response.ok) {
+                    throw new Error(`Error HTTP: ${response.status}`);
+                }
+        
+                const data = await response.json();
+                setMedico(data.$values || []);
+                setFilteredMedico(data.$values || []);
+            } catch (error) {
+                console.error("Error al cargar el Médico:", error);
+                alert("Error al cargar el Médico. Verifica tu conexión a Internet o la URL de la API.");
+            } finally {
+                setLoading(false);
+            }
+        };
     useEffect(() => {
         fetchMedico();
         const unsubscribe = navigation.addListener('focus', () => {

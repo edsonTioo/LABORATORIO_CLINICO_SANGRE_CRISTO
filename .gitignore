@@ -1,0 +1,93 @@
+# ===============================
+# ✅ ARCHIVO .gitignore UNIFICADO
+# React Native + .NET + VS + Node
+# ===============================
+
+# --- Dependencias (Node.js) ---
+node_modules/
+package-lock.json
+yarn.lock
+
+# --- Expo / React Native ---
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# --- Archivos nativos ---
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# --- Metro bundler ---
+.metro-health-check*
+
+# --- Depuración ---
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# --- macOS ---
+.DS_Store
+*.pem
+
+# --- Archivos locales de entorno ---
+.env
+.env*.local
+
+# --- TypeScript ---
+*.tsbuildinfo
+
+# ===============================
+# 🧩 .NET / Visual Studio / C#
+# ===============================
+
+# Compilación
+bin/
+obj/
+[Bb]uild/
+[Bb]uild[Ll]og.*
+
+# Archivos de usuario y temporales
+*.user
+*.suo
+*.userosscache
+*.userprefs
+*.dbmdl
+*.jfm
+
+# Configuración de IDE
+.vs/
+.vscode/
+.idea/
+
+# Paquetes NuGet
+*.nupkg
+*.snupkg
+packages/
+*.nuspec
+
+# Archivos de cache y logs
+*.cache
+*.log
+*.tmp
+
+# Archivos de respaldo
+*.bak
+*.old
+
+# Archivos del sistema
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Archivos generados por publicación
+publish/
+wwwroot/lib/
+
+# Archivos de entorno y secretos
+secrets.json
+appsettings.Development.json

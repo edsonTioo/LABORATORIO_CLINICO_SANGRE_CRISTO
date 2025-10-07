@@ -1,10 +1,12 @@
 ﻿using APILABORATORIO.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using static QuestPDF.Helpers.Colors;
 
 namespace APILABORATORIO.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class OrdenesController : ControllerBase

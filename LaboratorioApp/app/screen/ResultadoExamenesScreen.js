@@ -4,6 +4,7 @@ import { Dropdown } from 'react-native-element-dropdown';
 import { AntDesign, MaterialIcons, FontAwesome } from '@expo/vector-icons';
 import * as Animatable from 'react-native-animatable';
 import withAutoRefresh from './withAutoRefresh';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const API_URL = Platform.OS === 'android' ? 'http://10.0.2.2:5090/api/ImprimirResultados' : 'http://localhost:5090/api/ImprimirResultados';
 const API_CARGAR_PACIENTES = Platform.OS === 'android' ? 'http://10.0.2.2:5090/api/Paciente' : 'http://localhost:5090/api/Paciente';
@@ -21,19 +22,25 @@ const ResultadoExamenesScreen = () => {
     const cargarPacientes = async () => {
       setLoading(true);
       try {
-        const response = await fetch(API_CARGAR_PACIENTES);
+        const response = await fetch(API_CARGAR_PACIENTES, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`, // <-- aquí agregas el token
+          },
+        });
         const data = await response.json();
-
+  
         const pacientesData = data.$values || data;
-
+  
         const pacientesFormateados = pacientesData.map(paciente => ({
           Idcliente: paciente.idcliente || paciente.IDCliente,
           Nombre: paciente.nombre || paciente.Nombre,
           Cedula: paciente.cedula || paciente.Cedula,
           Genero: paciente.genero || paciente.Genero,
-          OrdenesCount: paciente.ordens?.$values?.length || paciente.Ordens?.length || 0
+          OrdenesCount:
+            paciente.ordens?.$values?.length || paciente.Ordens?.length || 0,
         }));
-
+  
         setPacientes(pacientesFormateados);
         setFilteredPacientes(pacientesFormateados);
       } catch (error) {
@@ -42,7 +49,7 @@ const ResultadoExamenesScreen = () => {
         setLoading(false);
       }
     };
-
+  
     cargarPacientes();
   }, []);
 
@@ -62,12 +69,17 @@ const ResultadoExamenesScreen = () => {
   const obtenerExamenes = async (idCliente) => {
     setLoading(true);
     try {
-      const response = await fetch(`${API_URL}/examenes-paciente/${idCliente}`);
+      const response = await fetch(`${API_URL}/examenes-paciente/${idCliente}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`, // <-- token también aquí
+        },
+      });
       const data = await response.json();
   
       const examenesData = data.$values || data;
   
-      const examenesOrdenados = Array.isArray(examenesData) 
+      const examenesOrdenados = Array.isArray(examenesData)
         ? examenesData.sort((a, b) => {
             const fechaA = new Date(a.fechaOrden || a.FechaOrden || 0);
             const fechaB = new Date(b.fechaOrden || b.FechaOrden || 0);

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Dimensions, StyleSheet, Platform, ActivityIndicator } from 'react-native';
 import { PieChart } from 'react-native-chart-kit';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 const OrdenesPorEstadoChart = () => {
   const [data, setData] = useState({});
@@ -50,21 +52,35 @@ const OrdenesPorEstadoChart = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${baseURL}/api/Graficos/OrdenesPorEstado`);
-        if (!response.ok) throw new Error("Error en la petición");
+        const token = await AsyncStorage.getItem("token");
+        if (!token) throw new Error("No se encontró token, inicia sesión nuevamente");
+    
+        const response = await fetch(`${baseURL}/api/Graficos/OrdenesPorEstado`, {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}` // <-- aquí agregamos el token
+          }
+        });
+    
+        if (!response.ok) {
+          const text = await response.text();
+          throw new Error(`Error ${response.status}: ${text}`);
+        }
+    
         const result = await response.json();
-        
+    
         const filteredData = Object.fromEntries(
           Object.entries(result).filter(([key]) => key !== '$id')
         );
-        
+    
         const total = Object.values(filteredData).reduce((sum, value) => sum + value, 0);
-        
+    
         setData(filteredData);
         setTotalOrdenes(total);
       } catch (error) {
         console.error("Error fetching data:", error);
-        setError("No se pudieron cargar los datos");
+        setError(error.message || "No se pudieron cargar los datos");
       } finally {
         setLoading(false);
       }

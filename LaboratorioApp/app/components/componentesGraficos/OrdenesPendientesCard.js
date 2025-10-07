@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator, Platform } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const OrdenesPendientesCard = () => {
   const [totalOrdenes, setTotalOrdenes] = useState(0);
@@ -12,26 +13,28 @@ const OrdenesPendientesCard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const token = await AsyncStorage.getItem("token");
+        if (!token) throw new Error("No se encontró token, inicia sesión nuevamente.");
+
         // Configuración de URL según plataforma
         const baseURL = Platform.OS === 'android' 
           ? 'http://10.0.2.2:5090' 
           : 'http://localhost:5090';
-        
+
         const response = await fetch(`${baseURL}/api/Graficos/OrdenesPendientes`, {
           headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          }
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`, // 👈 Aquí se añade el token
+          },
         });
 
-        // Verificar si la respuesta es HTML (error)
-        const text = await response.text();
-        if (text.startsWith('<!DOCTYPE')) {
-          throw new Error('El servidor devolvió una página HTML en lugar de JSON');
+        if (!response.ok) {
+          const text = await response.text();
+          throw new Error(`HTTP ${response.status}: ${text}`);
         }
 
-        // Parsear manualmente solo si es JSON válido
-        const data = JSON.parse(text);
+        const data = await response.json();
         setTotalOrdenes(data);
       } catch (err) {
         console.error("Error completo:", err);
@@ -43,6 +46,7 @@ const OrdenesPendientesCard = () => {
 
     fetchData();
   }, []);
+
 
 
 

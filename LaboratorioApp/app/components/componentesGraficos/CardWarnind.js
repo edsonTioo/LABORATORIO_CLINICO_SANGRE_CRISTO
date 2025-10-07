@@ -8,6 +8,7 @@ import {
   Platform,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const CardWarning = ({ scrollEnabled = true }) => {
   const [orders, setOrders] = useState([]);
@@ -17,26 +18,36 @@ const CardWarning = ({ scrollEnabled = true }) => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
+        const token = await AsyncStorage.getItem("token");
+        if (!token) throw new Error("No se encontró token, inicia sesión");
+  
         const baseURL =
           Platform.OS === "android"
             ? "http://10.0.2.2:5090/api/Ordenes/ordenes-con-detalles"
             : "http://localhost:5090/api/Ordenes/ordenes-con-detalles";
-
-        const response = await fetch(baseURL);
-        if (!response.ok) throw new Error("Error al cargar las órdenes");
-
+  
+        const response = await fetch(baseURL, {
+          headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`, // <-- token agregado
+          },
+        });
+  
+        if (!response.ok) throw new Error(`Error ${response.status} al cargar las órdenes`);
+  
         const data = await response.json();
-
-        // Filtrar solo órdenes FACTURADAS (excluir COMPLETADAS y ANULADAS)
+  
+        // Filtrar FACTURADAS
         const filteredOrders = data.$values.filter(
           (order) => order.estado === "FACTURADO"
         );
-
-        // Ordenar por fecha de entrega más cercana
+  
+        // Ordenar por fecha más cercana
         const sortedOrders = filteredOrders.sort(
           (a, b) => new Date(a.fechaEntrega) - new Date(b.fechaEntrega)
         );
-
+  
         setOrders(sortedOrders);
       } catch (err) {
         setError(err.message);
@@ -44,7 +55,7 @@ const CardWarning = ({ scrollEnabled = true }) => {
         setLoading(false);
       }
     };
-
+  
     fetchOrders();
   }, []);
 

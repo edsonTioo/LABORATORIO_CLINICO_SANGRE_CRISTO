@@ -14,6 +14,8 @@ import { DataTable, Text } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 const TablaClientes = ({ route }) => {
   const navigation = useNavigation();
@@ -33,28 +35,52 @@ const TablaClientes = ({ route }) => {
       : "http://localhost:5090/api/Paciente";
       
 
-  const fetchClientes = async () => {
-    try {
-      const response = await fetch(API_URL, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = await response.json();
-      setClientes(data.$values || []);
-      setFilteredData(data.$values || []);
-    } catch (error) {
-      console.error("Error al cargar clientes:", error);
-      Toast.show({
-        type: "error",
-        text1: "Error al cargar clientes",
-        text2: "Por favor, intente nuevamente",
-        visibilityTime: 3000,
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
+      const fetchClientes = async () => {
+        try {
+          const token = await AsyncStorage.getItem("token");
+          if (!token) {
+            throw new Error("No se encontró token, por favor inicia sesión nuevamente");
+          }
+      
+          console.log("🔑 Token usado:", token);
+      
+          const response = await fetch(API_URL, {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          });
+      
+          if (!response.ok) {
+            const text = await response.text();
+            throw new Error(`Error ${response.status}: ${text}`);
+          }
+      
+          const data = await response.json();
+          setClientes(data.$values || []);
+          setFilteredData(data.$values || []);
+        } catch (error) {
+          console.error("Error al cargar clientes:", error);
+          Toast.show({
+            type: "error",
+            text1: "Error al cargar clientes",
+            text2: error.message || "Por favor, intente nuevamente",
+            visibilityTime: 3000,
+          });
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      useEffect(() => {
+        const loadClientes = async () => {
+          const token = await AsyncStorage.getItem("token");
+          if (token) {
+            fetchClientes();
+          }
+        };
+        loadClientes();
+      }, []);
 
   useEffect(() => {
     fetchClientes();
@@ -104,6 +130,8 @@ const TablaClientes = ({ route }) => {
 
   const handleDelete = async (idCliente) => {
     try {
+      const token = await AsyncStorage.getItem("token"); // 👈 leer token
+      console.log("🔑 Token usado:", token); // 👈 revisar aquí
       const response = await fetch(`${API_URL}/${idCliente}`, {
         method: "DELETE",
         headers: {
@@ -111,15 +139,19 @@ const TablaClientes = ({ route }) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      if (response.ok) {
-        Toast.show({
-          type: "success",
-          text1: "Cliente eliminado",
-          text2: "El cliente se eliminó correctamente",
-          visibilityTime: 3000,
-        });
-        fetchClientes();
+      if (!response.ok) {
+        const text = await response.text();
+        throw new Error(`Error ${response.status}: ${text}`);
       }
+  
+      Toast.show({
+        type: "success",
+        text1: "Cliente eliminado",
+        text2: "El cliente se eliminó correctamente",
+        visibilityTime: 3000,
+      });
+  
+      fetchClientes();
     } catch (error) {
       console.error("Error deleting cliente:", error);
       Toast.show({

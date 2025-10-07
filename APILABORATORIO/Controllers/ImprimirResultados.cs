@@ -12,9 +12,11 @@ using System.Threading.Tasks;
 using System.Globalization; // Para CultureInfo
 using System; // Para NumberStyles (aunque normalmente ya está presente)
 using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LaboratorioClinico.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class ImprimirResultados : ControllerBase

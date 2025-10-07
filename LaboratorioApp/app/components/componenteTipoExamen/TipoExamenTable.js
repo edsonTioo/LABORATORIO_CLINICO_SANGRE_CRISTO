@@ -15,6 +15,7 @@ import { DataTable, Text, Provider as PaperProvider } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const TipoExamenTable = ({ route }) => {
     const { token, userData } = route.params;
@@ -32,32 +33,44 @@ const TipoExamenTable = ({ route }) => {
         ? "http://10.0.2.2:5090/api/TipoExamen"
         : "http://localhost:5090/api/TipoExamen";
 
-    const fetchTipoExamen = async () => {
-        try {
-            const response = await fetch(API_URL);
-            const data = await response.json();
-            setTipoExamen(data.$values || []);
-            setFilteredTipoExamen(data.$values || []);
-        } catch (error) {
-            console.error('Error al cargar Tipo Examen:', error);
-            Toast.show({
-                type: 'error',
-                text1: '❌ Error al cargar',
-                text2: 'No se pudo obtener la lista de tipos de examen',
-                visibilityTime: 3000
-            });
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        fetchTipoExamen();
-        const unsubscribe = navigation.addListener('focus', () => {
+        const fetchTipoExamen = async () => {
+            try {
+              const token = await AsyncStorage.getItem("token");
+              if (!token) throw new Error("No se encontró token, inicia sesión");
+          
+              const response = await fetch(API_URL, {
+                headers: {
+                  "Accept": "application/json",
+                  "Content-Type": "application/json",
+                  "Authorization": `Bearer ${token}`, // <--- aquí
+                },
+              });
+          
+              if (!response.ok) throw new Error(`Error ${response.status} al cargar Tipo Examen`);
+          
+              const data = await response.json();
+              setTipoExamen(data.$values || []);
+              setFilteredTipoExamen(data.$values || []);
+            } catch (error) {
+              console.error("Error al cargar Tipo Examen:", error);
+              Toast.show({
+                type: "error",
+                text1: "❌ Error al cargar",
+                text2: "No se pudo obtener la lista de tipos de examen",
+                visibilityTime: 3000,
+              });
+            } finally {
+              setLoading(false);
+            }
+          };
+          
+          useEffect(() => {
             fetchTipoExamen();
-        });
-        return unsubscribe;
-    }, [navigation]);
+            const unsubscribe = navigation.addListener("focus", () => {
+              fetchTipoExamen();
+            });
+            return unsubscribe;
+          }, [navigation]);
 
     useEffect(() => {
         if (searchQuery.trim() === '') {

@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Text;
 using System.Security.Cryptography;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LaboratorioClinico.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class MedicoUserController : ControllerBase
