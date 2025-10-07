@@ -1,10 +1,35 @@
-name: Hola GitHub Actions
+name: CodeQL Analysis
 
-on: [push]
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  schedule:
+    - cron: '0 0 * * 0' # cada domingo
 
 jobs:
-  saludo:
+  analyze:
+    name: CodeQL Analyze
     runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [csharp]
+
     steps:
-      - name: Mostrar mensaje
-        run: echo "Hola GitHub Actions"
+      - name: Clonar repositorio
+        uses: actions/checkout@v3
+
+      - name: Inicializar CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: ${{ matrix.language }}
+
+      - name: Ejecutar análisis
+        uses: github/codeql-action/analyze@v2
