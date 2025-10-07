@@ -1,55 +1,94 @@
-name: Análisis estático y estilo de código (.NET)
+name: Analisis Estático y Seguridad
 
 on:
   push:
-    branches: [ "Derek" ]
-    
+    branches:
+      - Derek
+
 jobs:
-  analysis:
+  # 🔍 Roslyn Format Check (C#)
+  roslyn-format:
+    name: Verificar formato C#
     runs-on: ubuntu-latest
-
     steps:
-      - name: 📥 Clonar el repositorio
-        uses: actions/checkout@v4
+      - name: Clonar repositorio
+        uses: actions/checkout@v3
 
-      - name: 🧰 Configurar .NET
-        uses: actions/setup-dotnet@v4
+      - name: Instalar .NET
+        uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 8.0.x
+          dotnet-version: '7.0.x'
 
-      - name: 📦 Restaurar dependencias
+      - name: Restaurar dependencias
         run: dotnet restore
+        working-directory: ./APILABORATORIO
 
-      - name: 🧪 Compilar proyecto (para asegurar que todo esté correcto)
-        run: dotnet build --configuration Release --no-restore
-
-      - name: 🔍 Verificar formato de código con dotnet format
+      - name: Verificar formato con Roslyn
         run: dotnet format --verify-no-changes
+        working-directory: ./APILABORATORIO
 
+  # 🛡️ CodeQL Security Scan (C#)
   codeql-analysis:
-    name: 🔐 Análisis de seguridad con CodeQL
+    name: Análisis de seguridad C#
     runs-on: ubuntu-latest
     permissions:
       actions: read
       contents: read
       security-events: write
-
-    strategy:
-      fail-fast: false
-      matrix:
-        language: [ 'csharp' ]
-
     steps:
-      - name: 📥 Clonar el repositorio
-        uses: actions/checkout@v4
+      - name: Clonar repositorio
+        uses: actions/checkout@v3
 
-      - name: 🧩 Inicializar CodeQL
-        uses: github/codeql-action/init@v3
+      - name: Inicializar CodeQL
+        uses: github/codeql-action/init@v2
         with:
-          languages: ${{ matrix.language }}
+          languages: csharp
 
-      - name: 🏗️ Compilar el proyecto para análisis
-        run: dotnet build --configuration Release
+      - name: Ejecutar análisis
+        uses: github/codeql-action/analyze@v2
 
-      - name: 🔍 Ejecutar análisis CodeQL
-        uses: github/codeql-action/analyze@v3
+  # 🧠 PHPStan (Laravel)
+  phpstan:
+    name: Análisis PHPStan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v3
+
+      - name: Instalar PHP y Composer
+        run: |
+          sudo apt update
+          sudo apt install php-cli unzip curl -y
+          curl -sS https://getcomposer.org/installer | php
+          sudo mv composer.phar /usr/local/bin/composer
+
+      - name: Instalar dependencias Laravel
+        run: composer install
+        working-directory: ./LaboratorioApp
+
+      - name: Ejecutar PHPStan
+        run: vendor/bin/phpstan analyse app/ --level=max
+        working-directory: ./LaboratorioApp
+
+  # 🎨 Laravel Pint
+  pint-style:
+    name: Validación de estilo Laravel
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v3
+
+      - name: Instalar PHP y Composer
+        run: |
+          sudo apt update
+          sudo apt install php-cli unzip curl -y
+          curl -sS https://getcomposer.org/installer | php
+          sudo mv composer.phar /usr/local/bin/composer
+
+      - name: Instalar dependencias Laravel
+        run: composer install
+        working-directory: ./LaboratorioApp
+
+      - name: Ejecutar Laravel Pint
+        run: ./vendor/bin/pint --test
+        working-directory: ./LaboratorioApp
