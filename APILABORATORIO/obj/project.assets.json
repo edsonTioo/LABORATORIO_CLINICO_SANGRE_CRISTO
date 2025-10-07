@@ -5124,11 +5124,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\edson\\OneDrive\\Desktop\\PROYECTO-LABORATORIO-CLINICO\\APILABORATORIO\\APILABORATORIO.csproj",
+      "projectUniqueName": "C:\\Users\\edson\\OneDrive\\Desktop\\PROYECTO-LABORATORIO-CLINICO\\LABORATORIO_CLINICO_SANGRE_CRISTO\\APILABORATORIO\\APILABORATORIO.csproj",
       "projectName": "APILABORATORIO",
-      "projectPath": "C:\\Users\\edson\\OneDrive\\Desktop\\PROYECTO-LABORATORIO-CLINICO\\APILABORATORIO\\APILABORATORIO.csproj",
+      "projectPath": "C:\\Users\\edson\\OneDrive\\Desktop\\PROYECTO-LABORATORIO-CLINICO\\LABORATORIO_CLINICO_SANGRE_CRISTO\\APILABORATORIO\\APILABORATORIO.csproj",
       "packagesPath": "C:\\Users\\edson\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\edson\\OneDrive\\Desktop\\PROYECTO-LABORATORIO-CLINICO\\APILABORATORIO\\obj\\",
+      "outputPath": "C:\\Users\\edson\\OneDrive\\Desktop\\PROYECTO-LABORATORIO-CLINICO\\LABORATORIO_CLINICO_SANGRE_CRISTO\\APILABORATORIO\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

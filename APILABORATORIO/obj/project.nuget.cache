@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yi9Nn/QG1g0=",
+  "dgSpecHash": "ZNgUtVD3UkQ=",
   "success": true,
-  "projectFilePath": "C:\\Users\\edson\\OneDrive\\Desktop\\PROYECTO-LABORATORIO-CLINICO\\APILABORATORIO\\APILABORATORIO.csproj",
+  "projectFilePath": "C:\\Users\\edson\\OneDrive\\Desktop\\PROYECTO-LABORATORIO-CLINICO\\LABORATORIO_CLINICO_SANGRE_CRISTO\\APILABORATORIO\\APILABORATORIO.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\edson\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\edson\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
