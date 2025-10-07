@@ -1,0 +1,25 @@
+name: Laravel Version Workflow
+
+on:
+  push:
+    branches:
+      - JAIRO
+
+jobs:
+  laravel-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Instalar PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'  # Ajusta según tu proyecto
+          extensions: mbstring, bcmath, xml
+
+      - name: Instalar Composer
+        run: composer --version
+
+      - name: Mostrar versión de PHP
+        run: php --version

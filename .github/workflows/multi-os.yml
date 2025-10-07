@@ -1,0 +1,23 @@
+name: Multi-OS Workflow
+
+on:
+  push:
+    branches:
+      - JAIRO
+
+jobs:
+  check-os:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+      - name: Mostrar info del sistema
+        run: |
+  if [[ "$RUNNER_OS" == "Windows" ]]; then
+    ver
+  else
+    uname -a
+  fi
+

@@ -1,0 +1,21 @@
+name: Dotnet Version Workflow
+
+on:
+  push:
+    branches:
+      - JAIRO
+
+jobs:
+  dotnet-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Instalar .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'  # Ajusta a la versión que uses
+
+      - name: Mostrar versión de .NET
+        run: dotnet --version
