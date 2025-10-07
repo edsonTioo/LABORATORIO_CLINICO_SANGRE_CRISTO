@@ -1,0 +1,23 @@
+name: "0. Find Project Structure"
+
+on:
+  push:
+    branches: [ ANDERSON ]
+
+jobs:
+  find-project:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Show complete repository structure
+        run: |
+          echo "=== ESTRUCTURA COMPLETA DEL REPOSITORIO ==="
+          find . -type f -name "*.csproj" -o -name "*.sln" | head -20
+          echo ""
+          echo "=== LISTADO DE ARCHIVOS ==="
+          ls -la
+          echo ""
+          echo "=== SUBDIRECTORIOS ==="
+          find . -type d -name "*" | head -20
