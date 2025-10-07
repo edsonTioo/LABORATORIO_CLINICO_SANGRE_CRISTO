@@ -1,0 +1,14 @@
+name: Hello World Workflow
+
+on: 
+  push:
+    branches:
+      - JAIRO  # 
+
+jobs:
+  say_hello:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Mostrar mensaje en consola
+        run: echo "Hola GitHub Actions desde la rama JAIRO 👋"
