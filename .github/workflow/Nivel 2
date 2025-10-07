@@ -1,0 +1,29 @@
+name: Compilación y pruebas .NET
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Clonar el repositorio
+        uses: actions/checkout@v4
+
+      - name: 🧰 Configurar .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x  # Cambia según la versión que uses
+
+      - name: 📦 Restaurar dependencias
+        run: dotnet restore
+
+      - name: 🏗️ Compilar proyecto
+        run: dotnet build --configuration Release --no-restore
+
+      - name: 🧪 Ejecutar pruebas unitarias
+        run: dotnet test --no-build --verbosity normal
