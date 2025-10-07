@@ -18,11 +18,8 @@ jobs:
         with:
           dotnet-version: '9.0.x'
           
-      - name: Find project file
-        run: find . -name "*.csproj" -type f
-        
       - name: Restore dependencies
-        run: dotnet restore APILABORATORIO.csproj
+        run: dotnet restore APILABORATORIO/APILABORATORIO.sln
         
       - name: Build project
-        run: dotnet build APILABORATORIO.csproj --no-restore --configuration Release
+        run: dotnet build APILABORATORIO/APILABORATORIO.sln --no-restore --configuration Release
