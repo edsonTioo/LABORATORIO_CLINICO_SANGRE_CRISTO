@@ -6,6 +6,12 @@ on:
   pull_request:
     branches: [ ANDERSON, main ]
 
+# AÑADE ESTOS PERMISOS GLOBALES
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,7 +27,6 @@ jobs:
         
     - name: Restore dependencies
       run: dotnet restore APILABORATORIO/
-      working-directory: ./
       
     - name: Build
       run: dotnet build --no-restore --configuration Release
@@ -34,6 +39,12 @@ jobs:
   codeql-analysis:
     runs-on: ubuntu-latest
     needs: build
+    
+    # AÑADE PERMISOS ESPECÍFICOS PARA ESTE JOB
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
     
     steps:
     - name: Checkout code
@@ -50,3 +61,5 @@ jobs:
       
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
+      with:
+        category: "/language:csharp"
