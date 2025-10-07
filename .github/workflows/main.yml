@@ -2,9 +2,7 @@ name: CodeQL Analysis
 
 on:
   push:
-    branches: [master]
-  pull_request:
-    branches: [master]
+    branches: [Derek]
   schedule:
     - cron: '0 0 * * 0' # cada domingo
 
