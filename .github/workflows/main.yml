@@ -2,9 +2,7 @@ name: "DerekNivel 1"
 
 on:
   push:
-    branches: [ ANDERSON ]
-  pull_request:
-    branches: [ ANDERSON ]
+    branches: [ Derek ]
 
 jobs:
   # 🔹 1.1 Hello World básico
