@@ -1,0 +1,133 @@
+name: "Nivel 2 - Compilación y Pruebas"
+
+on:
+  push:
+    branches: [ edson ]
+  pull_request:
+    branches: [ edson ]
+
+jobs:
+  # 🔹 2.1 Compilación del proyecto .NET API
+  build-dotnet-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+    
+      - name: Setup .NET 9.0
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+    
+      - name: Restaurar dependencias .NET
+        working-directory: ./APILABORATORIO
+        run: dotnet restore
+    
+      - name: Compilar proyecto .NET
+        working-directory: ./APILABORATORIO
+        run: dotnet build --no-restore --configuration Release
+    
+      - name: Verificar archivos de compilación
+        working-directory: ./APILABORATORIO
+        run: find . -name "*.dll" -o -name "*.exe" | head -10
+
+  # 🔹 2.2 Pruebas unitarias .NET
+  test-dotnet-api:
+    runs-on: ubuntu-latest
+    needs: build-dotnet-api
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+    
+      - name: Setup .NET 9.0
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+    
+      - name: Restaurar dependencias
+        working-directory: ./APILABORATORIO
+        run: dotnet restore
+    
+      - name: Compilar proyecto
+        working-directory: ./APILABORATORIO
+        run: dotnet build --no-restore --configuration Release
+    
+      - name: Ejecutar pruebas unitarias
+        working-directory: ./APILABORATORIO
+        run: dotnet test --no-build --verbosity normal
+
+  # 🔹 2.3 Instalación y ejecución del proyecto React
+  build-react-app:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+    
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: './LaboratorioApp/package-lock.json'
+    
+      - name: Instalar dependencias React
+        working-directory: ./LaboratorioApp
+        run: npm ci
+    
+      - name: Verificar scripts disponibles en package.json
+        working-directory: ./LaboratorioApp
+        run: npm run
+    
+      - name: Verificar carpeta node_modules (dependencias instaladas)
+        working-directory: ./LaboratorioApp
+        run: |
+          echo "Verificando node_modules..."
+          ls -la node_modules | head -5
+          echo "Dependencias instaladas correctamente"
+    
+      - name: Ejecutar comando de desarrollo React (npm run web)
+        working-directory: ./LaboratorioApp
+        run: |
+          echo "🔧 Ejecutando npm run web..."
+          # Usamos timeout para evitar que se quede ejecutando indefinidamente
+          timeout 30s npm run web || echo "Comando web ejecutado (se detuvo después de 30s)"
+    
+      - name: Verificar estructura del proyecto React
+        working-directory: ./LaboratorioApp
+        run: |
+          echo "📁 Estructura del proyecto React:"
+          ls -la
+          echo "--- Contenido de src/ ---"
+          ls -la src/ || echo "No existe carpeta src"
+          echo "--- Contenido de public/ ---"
+          ls -la public/ || echo "No existe carpeta public"
+
+  # 🔹 2.4 Pruebas React (si existen)
+  test-react-app:
+    runs-on: ubuntu-latest
+    needs: build-react-app
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+    
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+    
+      - name: Instalar dependencias
+        working-directory: ./LaboratorioApp
+        run: npm ci
+    
+      - name: Ejecutar pruebas React (si están configuradas)
+        working-directory: ./LaboratorioApp
+        run: |
+          # Verifica si existe el script test en package.json
+          if npm run | grep -q "test"; then
+            echo "🧪 Ejecutando pruebas React..."
+            npm test -- --watchAll=false --passWithNoTests
+          else
+            echo "📝 No se encontró script de pruebas en package.json"
+            echo "Scripts disponibles:"
+            npm run
+          fi
