@@ -9,6 +9,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./APILABORATORIO
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -18,12 +21,11 @@ jobs:
         with:
           dotnet-version: '9.0.x'
           
-      - name: Restore dependencies
-        run: |
-          cd APILABORATORIO
-          dotnet restore
+      - name: Verify directory
+        run: pwd && ls -la
           
+      - name: Restore dependencies
+        run: dotnet restore
+        
       - name: Build project
-        run: |
-          cd APILABORATORIO
-          dotnet build --no-restore --configuration Release
+        run: dotnet build --no-restore --configuration Release
