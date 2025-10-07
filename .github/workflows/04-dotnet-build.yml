@@ -19,9 +19,11 @@ jobs:
           dotnet-version: '9.0.x'
           
       - name: Restore dependencies
-        working-directory: ./APILABORATORIO
-        run: dotnet restore
-        
+        run: |
+          cd APILABORATORIO
+          dotnet restore
+          
       - name: Build project
-        working-directory: ./APILABORATORIO
-        run: dotnet build --no-restore --configuration Release
+        run: |
+          cd APILABORATORIO
+          dotnet build --no-restore --configuration Release
