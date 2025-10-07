@@ -1,0 +1,122 @@
+name: "Nivel 2 - Compilación y Pruebas"
+
+on:
+  push:
+    branches: [ ANDERSON ]
+  pull_request:
+    branches: [ ANDERSON ]
+
+jobs:
+  # 🔹 2.1 Compilación del proyecto .NET API
+  build-dotnet-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+    
+      - name: Setup .NET 9.0
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+    
+      - name: Restaurar dependencias .NET
+        working-directory: ./APILABORATORIO
+        run: dotnet restore
+    
+      - name: Compilar proyecto .NET
+        working-directory: ./APILABORATORIO
+        run: dotnet build --no-restore --configuration Release
+    
+      - name: Verificar archivos de compilación
+        working-directory: ./APILABORATORIO
+        run: find . -name "*.dll" -o -name "*.exe" | head -10
+
+  # 🔹 2.2 Pruebas unitarias .NET
+  test-dotnet-api:
+    runs-on: ubuntu-latest
+    needs: build-dotnet-api
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+    
+      - name: Setup .NET 9.0
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+    
+      - name: Restaurar dependencias
+        working-directory: ./APILABORATORIO
+        run: dotnet restore
+    
+      - name: Compilar proyecto
+        working-directory: ./APILABORATORIO
+        run: dotnet build --no-restore --configuration Release
+    
+      - name: Ejecutar pruebas unitarias
+        working-directory: ./APILABORATORIO
+        run: dotnet test --no-build --verbosity normal
+
+  # 🔹 2.3 Instalación y build del proyecto React
+  build-react-app:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+    
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: './LaboratorioApp/package-lock.json'
+    
+      - name: Instalar dependencias React
+        working-directory: ./LaboratorioApp
+        run: npm ci
+    
+      - name: Verificar carpeta vendor (dependencias instaladas)
+        working-directory: ./LaboratorioApp
+        run: |
+          echo "Verificando node_modules..."
+          ls -la node_modules | head -5
+          echo "Dependencias instaladas correctamente"
+    
+      - name: Build de la aplicación React
+        working-directory: ./LaboratorioApp
+        run: npm run build
+    
+      - name: Verificar archivos de build
+        working-directory: ./LaboratorioApp
+        run: |
+          echo "Contenido de la carpeta build:"
+          ls -la build/
+          echo "Build completado exitosamente!"
+
+  # 🔹 2.4 Pruebas React (si existen)
+  test-react-app:
+    runs-on: ubuntu-latest
+    needs: build-react-app
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+    
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+    
+      - name: Instalar dependencias
+        working-directory: ./LaboratorioApp
+        run: npm ci
+    
+      - name: Ejecutar pruebas React (si están configuradas)
+        working-directory: ./LaboratorioApp
+        run: |
+          # Verifica si existe el script test en package.json
+          if npm run | grep -q "test"; then
+            echo "Ejecutando pruebas React..."
+            npm test -- --watchAll=false --passWithNoTests
+          else
+            echo "No se encontró script de pruebas en package.json"
+            echo "Para agregar pruebas, ejecuta: npx create-react-app . --template typescript"
+          fi
