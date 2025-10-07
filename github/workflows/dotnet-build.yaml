@@ -1,0 +1,25 @@
+name: "4. .NET Build"
+
+on:
+  push:
+    branches: [ edson ]
+  pull_request:
+    branches: [ edson ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+          
+      - name: Restore dependencies
+        run: dotnet restore APILABORATORIO/APILABORATORIO.sln
+        
+      - name: Build project
+        run: dotnet build APILABORATORIO/APILABORATORIO.sln --no-restore --configuration Release

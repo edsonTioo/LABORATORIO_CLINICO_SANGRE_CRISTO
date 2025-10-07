@@ -1,0 +1,22 @@
+name: "3. .NET Version Check"
+
+on:
+  push:
+    branches: [ edson ]
+  pull_request:
+    branches: [ edson ]
+
+jobs:
+  dotnet-version:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+          
+      - name: Check .NET version
+        run: dotnet --version

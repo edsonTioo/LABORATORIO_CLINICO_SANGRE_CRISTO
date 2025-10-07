@@ -1,0 +1,15 @@
+# .github/workflows/01-hello-world.yml
+name: "1. Hello World"
+
+on:
+  push:
+    branches: [ edson ]
+  pull_request:
+    branches: [ edson ]
+
+jobs:
+  hello-world:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mostrar mensaje
+        run: echo "Hola GitHub Actions"
