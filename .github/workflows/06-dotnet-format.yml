@@ -1,0 +1,25 @@
+name: "6. .NET Format Analysis"
+
+on:
+  push:
+    branches: [ ANDERSON ]
+  pull_request:
+    branches: [ ANDERSON ]
+
+jobs:
+  format-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+          
+      - name: Install dotnet-format tool
+        run: dotnet tool install -g dotnet-format
+        
+      - name: Check code formatting
+        run: dotnet format --verify-no-changes --verbosity diagnostic
