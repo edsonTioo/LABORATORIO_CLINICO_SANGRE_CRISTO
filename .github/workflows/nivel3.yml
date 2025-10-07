@@ -1,0 +1,57 @@
+name: Análisis estático y estilo de código (.NET)
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  analysis:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Clonar el repositorio
+        uses: actions/checkout@v4
+
+      - name: 🧰 Configurar .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: 📦 Restaurar dependencias
+        run: dotnet restore
+
+      - name: 🧪 Compilar proyecto (para asegurar que todo esté correcto)
+        run: dotnet build --configuration Release --no-restore
+
+      - name: 🔍 Verificar formato de código con dotnet format
+        run: dotnet format --verify-no-changes
+
+  codeql-analysis:
+    name: 🔐 Análisis de seguridad con CodeQL
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'csharp' ]
+
+    steps:
+      - name: 📥 Clonar el repositorio
+        uses: actions/checkout@v4
+
+      - name: 🧩 Inicializar CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+
+      - name: 🏗️ Compilar el proyecto para análisis
+        run: dotnet build --configuration Release
+
+      - name: 🔍 Ejecutar análisis CodeQL
+        uses: github/codeql-action/analyze@v3
