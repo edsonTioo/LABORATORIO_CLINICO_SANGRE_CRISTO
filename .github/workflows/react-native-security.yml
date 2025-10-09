@@ -1,105 +1,55 @@
-name: "🛡️ Security Scan - React Native"
+name: "Security Scan - React Native"
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ master, develop ]
   pull_request:
-    branches: [ main, develop ]
+    branches: [ master, develop ]
   workflow_dispatch:
 
 jobs:
   javascript-analysis:
     name: "CodeQL - JavaScript/React Native"
     runs-on: ubuntu-latest
-    permissions:
-      security-events: write
-      actions: read
-      contents: read
     
     steps:
-    - name: "📥 Checkout código"
+    - name: "Checkout código"
       uses: actions/checkout@v4
       
-    - name: "🛠️ Setup Node.js"
+    - name: "Setup Node.js"
       uses: actions/setup-node@v4
       with:
         node-version: '18'
-        cache: 'npm'
-        cache-dependency-path: '**/package.json'
         
-    - name: "📦 Instalar dependencias React Native"
+    - name: "Instalar dependencias React Native"
       run: |
         cd LaboratorioApp
         npm ci
         
-    - name: "🛡️ Inicializar CodeQL"
+    - name: "Inicializar CodeQL"
       uses: github/codeql-action/init@v3
       with:
         languages: javascript
-        queries: security-extended,security-and-quality
         
-    - name: "🔬 Autobuild JavaScript"
+    - name: "Autobuild JavaScript"
       uses: github/codeql-action/autobuild@v3
         
-    - name: "📊 Analizar con CodeQL"
+    - name: "Analizar con CodeQL"
       uses: github/codeql-action/analyze@v3
-      with:
-        category: "/language:javascript"
 
   npm-audit:
     name: "Auditoría NPM - Dependencias"
     runs-on: ubuntu-latest
     
     steps:
-    - name: "📥 Checkout código"
+    - name: "Checkout código"
       uses: actions/checkout@v4
       
-    - name: "🛠️ Setup Node.js"
+    - name: "Setup Node.js"
       uses: actions/setup-node@v4
       with:
         node-version: '18'
         
-    - name: "🔍 Ejecutar npm audit"
+    - name: "Ejecutar npm audit"
       run: |
         cd LaboratorioApp
-        npm audit --audit-level=high
-      continue-on-error: true
-      
-    - name: "📋 Generar reporte NPM"
-      run: |
-        cd LaboratorioApp
-        npm audit --json > npm-audit-report.json || true
-        echo "## 📦 Auditoría NPM - React Native" >> $GITHUB_STEP_SUMMARY
-        echo "" >> $GITHUB_STEP_SUMMARY
-        echo "**Proyecto:** LaboratorioApp (React Native)" >> $GITHUB_STEP_SUMMARY
-        echo "**Dependencias analizadas:** $(npm list --all --parseable | wc -l)" >> $GITHUB_STEP_SUMMARY
-
-  eslint-security:
-    name: "ESLint - Análisis Seguridad"
-    runs-on: ubuntu-latest
-    
-    steps:
-    - name: "📥 Checkout código"
-      uses: actions/checkout@v4
-      
-    - name: "🛠️ Setup Node.js"
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-        
-    - name: "📦 Instalar ESLint y plugins seguridad"
-      run: |
-        cd LaboratorioApp
-        npm install --save-dev eslint-plugin-security eslint-plugin-react-security
-        npm list eslint-plugin-security
-        
-    - name: "🔍 Ejecutar ESLint con reglas seguridad"
-      run: |
-        cd LaboratorioApp
-        npx eslint . --ext .js,.jsx,.ts,.tsx --config .eslintrc.json --format json > eslint-report.json || true
-        
-    - name: "💾 Guardar reporte ESLint"
-      uses: actions/upload-artifact@v4
-      with:
-        name: eslint-security-report
-        path: LaboratorioApp/eslint-report.json
-        retention-days: 30
+        npm audit --audit-level=high || true
