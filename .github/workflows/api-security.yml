@@ -1,0 +1,106 @@
+name: "🛡️ Security Scan - API Backend"
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+
+jobs:
+  codeql-dotnet:
+    name: "CodeQL - .NET API"
+    runs-on: windows-latest
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
+    
+    steps:
+    - name: "📥 Checkout código"
+      uses: actions/checkout@v4
+      
+    - name: "🛠️ Setup .NET"
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: | 
+          6.x
+          7.x
+          8.x
+          
+    - name: "🛡️ Inicializar CodeQL"
+      uses: github/codeql-action/init@v3
+      with:
+        languages: csharp
+        queries: security-extended,security-and-quality
+        build-mode: manual
+        
+    - name: "🏗️ Build .NET API"
+      run: |
+        cd APILABORATORIO
+        dotnet restore
+        dotnet build --configuration Release --no-restore
+        
+    - name: "📊 Analizar con CodeQL"
+      uses: github/codeql-action/analyze@v3
+      with:
+        category: "/language:csharp"
+
+  dependency-check:
+    name: "OWASP - Dependencias .NET"
+    runs-on: windows-latest
+    
+    steps:
+    - name: "📥 Checkout código"
+      uses: actions/checkout@v4
+      
+    - name: "🚀 Setup Java"
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+        
+    - name: "🛡️ OWASP Dependency Check"
+      uses: dependency-check/Dependency-Check_Action@main
+      with:
+        project: 'APILABORATORIO'
+        path: 'APILABORATORIO'
+        format: 'HTML'
+        args: >
+          --enableNuget
+          --scan **/*.csproj
+          --out reports/owasp-api
+          
+    - name: "💾 Guardar reporte OWASP"
+      uses: actions/upload-artifact@v4
+      with:
+        name: owasp-dependency-report
+        path: APILABORATORIO/reports/
+        retention-days: 30
+
+  nuget-audit:
+    name: "Auditoría NuGet"
+    runs-on: windows-latest
+    
+    steps:
+    - name: "📥 Checkout código"
+      uses: actions/checkout@v4
+      
+    - name: "🛠️ Setup .NET"
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '6.x'
+        
+    - name: "🔍 Ejecutar auditoría NuGet"
+      run: |
+        cd APILABORATORIO
+        dotnet list package --vulnerable --include-transitive
+        dotnet list package --include-transitive > nuget-dependencies.txt
+        
+    - name: "📋 Reporte dependencias .NET"
+      run: |
+        echo "## 📦 Dependencias .NET - APILABORATORIO" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Proyectos analizados:**" >> $GITHUB_STEP_SUMMARY
+        Get-ChildItem -Path "APILABORATORIO" -Recurse -Filter "*.csproj" | ForEach-Object {
+          echo "- $($_.Name)" >> $GITHUB_STEP_SUMMARY
+        }
