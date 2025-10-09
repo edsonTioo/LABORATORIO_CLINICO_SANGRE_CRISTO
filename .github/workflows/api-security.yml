@@ -6,6 +6,12 @@ on:
     branches: [ master, develop ]
   workflow_dispatch:
 
+# AGREGAR ESTA SECCIÓN DE PERMISOS
+permissions:
+  security-events: write
+  actions: read
+  contents: read
+
 jobs:
   codeql-dotnet:
     name: "CodeQL - .NET API"

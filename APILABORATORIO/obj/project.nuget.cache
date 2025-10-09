@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "dgSpecHash": "0z8Wbycxkl8=",
-  "success": false,
+  "dgSpecHash": "V4YA14IPKDo=",
+  "success": true,
   "projectFilePath": "C:\\Users\\DELL\\Downloads\\LABORATORIO_CLINICO_SANGRE_CRISTO\\APILABORATORIO\\APILABORATORIO.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DELL\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
@@ -91,15 +91,5 @@
     "C:\\Users\\DELL\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "C:\\Users\\DELL\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1102",
-      "level": "Error",
-      "message": "No se encuentra el paquete SecurityCodeScan con la versión (>= 5.6.6)\r\n  - Versiones encontradas en nuget.org: 17 [ versión más cercana: 3.5.4 ]\r\n  - Versiones encontradas en Microsoft Visual Studio Offline Packages: 0\r\n  - Versiones encontradas en C:\\Program Files\\dotnet\\library-packs: 0",
-      "libraryId": "SecurityCodeScan",
-      "targetGraphs": [
-        "net9.0"
-      ]
-    }
-  ]
+  "logs": []
 }

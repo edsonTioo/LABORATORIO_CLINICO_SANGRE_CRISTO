@@ -5950,7 +5950,6 @@
       "Microsoft.EntityFrameworkCore.Tools >= 9.0.4",
       "NWebsec.AspNetCore.Middleware >= 3.0.0",
       "QuestPDF >= 2025.4.3",
-      "SecurityCodeScan >= 5.6.6",
       "Swashbuckle.AspNetCore >= 8.1.1",
       "System.IdentityModel.Tokens.Jwt >= 8.9.0"
     ]
@@ -6042,11 +6041,6 @@
             "target": "Package",
             "version": "[2025.4.3, )"
           },
-          "SecurityCodeScan": {
-            "suppressParent": "All",
-            "target": "Package",
-            "version": "[5.6.6, )"
-          },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[8.1.1, )"
@@ -6078,16 +6072,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.205/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1102",
-      "level": "Error",
-      "message": "No se encuentra el paquete SecurityCodeScan con la versión (>= 5.6.6)\r\n  - Versiones encontradas en nuget.org: 17 [ versión más cercana: 3.5.4 ]\r\n  - Versiones encontradas en Microsoft Visual Studio Offline Packages: 0\r\n  - Versiones encontradas en C:\\Program Files\\dotnet\\library-packs: 0",
-      "libraryId": "SecurityCodeScan",
-      "targetGraphs": [
-        "net9.0"
-      ]
-    }
-  ]
+  }
 }
