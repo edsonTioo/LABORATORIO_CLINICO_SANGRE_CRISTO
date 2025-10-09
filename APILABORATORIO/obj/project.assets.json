@@ -5950,28 +5950,29 @@
       "Microsoft.EntityFrameworkCore.Tools >= 9.0.4",
       "NWebsec.AspNetCore.Middleware >= 3.0.0",
       "QuestPDF >= 2025.4.3",
+      "SecurityCodeScan >= 5.6.6",
       "Swashbuckle.AspNetCore >= 8.1.1",
       "System.IdentityModel.Tokens.Jwt >= 8.9.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\edson\\.nuget\\packages\\": {},
+    "C:\\Users\\DELL\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\edson\\Downloads\\LaboratorioClinico\\LaboratorioClinico\\APILABORATORIO\\APILABORATORIO.csproj",
+      "projectUniqueName": "C:\\Users\\DELL\\Downloads\\LABORATORIO_CLINICO_SANGRE_CRISTO\\APILABORATORIO\\APILABORATORIO.csproj",
       "projectName": "APILABORATORIO",
-      "projectPath": "C:\\Users\\edson\\Downloads\\LaboratorioClinico\\LaboratorioClinico\\APILABORATORIO\\APILABORATORIO.csproj",
-      "packagesPath": "C:\\Users\\edson\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\edson\\Downloads\\LaboratorioClinico\\LaboratorioClinico\\APILABORATORIO\\obj\\",
+      "projectPath": "C:\\Users\\DELL\\Downloads\\LABORATORIO_CLINICO_SANGRE_CRISTO\\APILABORATORIO\\APILABORATORIO.csproj",
+      "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\DELL\\Downloads\\LABORATORIO_CLINICO_SANGRE_CRISTO\\APILABORATORIO\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\edson\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -6041,6 +6042,11 @@
             "target": "Package",
             "version": "[2025.4.3, )"
           },
+          "SecurityCodeScan": {
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "[5.6.6, )"
+          },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[8.1.1, )"
@@ -6069,8 +6075,19 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.205/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1102",
+      "level": "Error",
+      "message": "No se encuentra el paquete SecurityCodeScan con la versión (>= 5.6.6)\r\n  - Versiones encontradas en nuget.org: 17 [ versión más cercana: 3.5.4 ]\r\n  - Versiones encontradas en Microsoft Visual Studio Offline Packages: 0\r\n  - Versiones encontradas en C:\\Program Files\\dotnet\\library-packs: 0",
+      "libraryId": "SecurityCodeScan",
+      "targetGraphs": [
+        "net9.0"
+      ]
+    }
+  ]
 }
