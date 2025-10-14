@@ -2,8 +2,8 @@ name: "📊 Reporte Consolidado Seguridad"
 on:
   workflow_run:
     workflows:
-      - "🛡️ Security Scan - React Native"
-      - "🛡️ Security Scan - API Backend"
+      - "Security Scan - React Native"
+      - "Security Scan - API Backend"
     types:
       - completed
   schedule:
